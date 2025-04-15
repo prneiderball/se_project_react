@@ -1,0 +1,60 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    background-color: #fff;
+    width: 1360px;
+    height: 40px;
+    max-width: 100%;
+    border: red 1px solid;
+    align-items: center;
+    margin: 32px 40px 28px;
+  }
+  
+  .header__logo {
+    width: 89px;
+    height: 40px;
+    border: red 1px solid;
+  }
+  
+  .header__date {
+    font-size: 20px;
+    font-weight: 500;
+    color: #000;
+    border: red 1px solid; 
+    margin-left: 20px;
+    margin-right: auto;
+  }
+  
+  .header__addclothes--btn {
+    background-color: transparent;
+    color: #000;
+    border: 1px solid red; 
+    padding: 0;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 20px;
+  }
+  
+  .header__user--container {
+    display: flex;
+    align-items: center;
+    color: #000;
+    border: red 1px solid;
+  }
+  
+  .header__user--container p {
+    margin: 0 10px;
+    font-size: 16px; 
+  }
+  
+  .header__user--container img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  

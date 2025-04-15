@@ -1,9 +1,12 @@
 import './App.css'
+import './Header.css'
+import Header from './Header'
 
 function App() {
   return (
     <div>
-      Testing...
+      <Header />
+      Main Content
     </div>
   )
 }
