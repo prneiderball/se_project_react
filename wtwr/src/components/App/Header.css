@@ -7,7 +7,7 @@
     width: 1360px;
     height: 40px;
     max-width: 100%;
-    border: red 1px solid;
+    object-fit: contain;
     align-items: center;
     margin: 32px 40px 28px;
   }
@@ -15,45 +15,45 @@
   .header__logo {
     width: 89px;
     height: 40px;
-    border: red 1px solid;
+    margin-left: 40px;
   }
   
   .header__date {
+    height: 24px;
     font-size: 20px;
     font-weight: 500;
     color: #000;
-    border: red 1px solid; 
-    margin-left: 20px;
-    margin-right: auto;
+    margin: 8px auto 8px 20px;
   }
   
   .header__addclothes--btn {
+    height: 24px;
     background-color: transparent;
+    border: none;
     color: #000;
-    border: 1px solid red; 
     padding: 0;
     font-size: 24px;
     font-weight: 700;
     cursor: pointer;
-    margin-right: 20px;
+    margin: 8px 20px;
   }
   
   .header__user--container {
     display: flex;
     align-items: center;
     color: #000;
-    border: red 1px solid;
   }
   
   .header__user--container p {
-    margin: 0 10px;
+    height: 25px;
+    margin: 0;
     font-size: 16px; 
   }
   
   .header__user--container img {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    margin-right: 10px;
+    margin: 32px 40px;
   }
   
