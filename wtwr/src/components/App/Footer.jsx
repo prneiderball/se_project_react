@@ -1,3 +1,5 @@
+import './Footer.css'
+
 function Footer() {
     return <footer className="footer">
     <h2 className="footer__name">Developed by P.R. Neider-Ball</h2>

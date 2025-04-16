@@ -1,21 +1,14 @@
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
     display: flex;
-    background-color: #fff;
-    width: 1360px;
-    height: 40px;
-    max-width: 100%;
-    object-fit: contain;
     align-items: center;
-    margin: 32px 40px 28px;
+    height: 40px;
+    margin: 32px 0 28px;
   }
   
   .header__logo {
     width: 89px;
     height: 40px;
-    margin-left: 40px;
+    margin-right: 24px;
   }
   
   .header__date {
@@ -23,11 +16,10 @@
     font-size: 20px;
     font-weight: 500;
     color: #000;
-    margin: 8px auto 8px 20px;
+    margin: 0;
   }
   
   .header__addclothes--btn {
-    height: 24px;
     background-color: transparent;
     border: none;
     color: #000;
@@ -35,25 +27,24 @@
     font-size: 24px;
     font-weight: 700;
     cursor: pointer;
-    margin: 8px 20px;
+    margin: 0 20px 0 auto;
   }
   
   .header__user--container {
     display: flex;
     align-items: center;
     color: #000;
+    gap: 12px;
   }
   
-  .header__user--container p {
-    height: 25px;
+  .header__username {
     margin: 0;
     font-size: 16px; 
   }
   
-  .header__user--container img {
+  .header__avatar {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    margin: 32px 40px;
+    margin: 0;
   }
   

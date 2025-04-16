@@ -1,3 +1,7 @@
+import './Header.css';
+import Logo from '../../assets/wtwrlogo.svg';
+import Avatar from '../../assets/defaultavatar.svg';
+
 function Header() {
     const getDate = () => {
         const date = new Date();
@@ -9,12 +13,12 @@ function Header() {
 
     return (
         <header className="header">
-            <img className="header__logo" src="./src/assets/wtwrlogo.svg" alt="wtwr logo" />
+            <img className="header__logo" src={Logo} alt="wtwr logo" />
             <p className="header__date">{getDate()}, (location)</p>
             <button className="header__addclothes--btn">+ Add Clothes</button>
             <div className="header__user--container">
-            <p>Terrence Tegegne</p>
-            <img src="./src/assets/defaultavatar.svg" alt="" />
+            <p className="header__username">Terrence Tegegne</p>
+            <img className="header__avatar" src={Avatar}  alt="" />
             </div>
         </header>
     );
