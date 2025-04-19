@@ -2,7 +2,8 @@
 @font-face {
     font-family: "Cabinet Grotesk";
     src: 
-    url(../public/fonts/CabinetGrotesk.svg) format("svg"),
-    url(../public/fonts/CabinetGrotesk2.svg) format("svg"),
-    url(../public/fonts/CabinetGrotesk3.svg) format("svg"),
+url(../src/vendor/fonts/CabinetGrotesk-Medium.woff2) format("woff2"),
+url(../src/vendor/fonts/CabinetGrotesk-Bold.woff) format("woff");
+    font-weight: normal;
+    font-style: normal;
 }
