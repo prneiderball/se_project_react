@@ -1,5 +1,6 @@
 import ItemCard from "./ItemCard.jsx";
 import WeatherCard from "./WeatherCard.jsx";
+import './Main.css'
 
 function Main() {
     return (
