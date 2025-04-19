@@ -1,1 +1,8 @@
 @import url(./vendor/normalize.css);
+@font-face {
+    font-family: "Cabinet Grotesk";
+    src: 
+    url(../public/fonts/CabinetGrotesk.svg) format("svg"),
+    url(../public/fonts/CabinetGrotesk2.svg) format("svg"),
+    url(../public/fonts/CabinetGrotesk3.svg) format("svg"),
+}
