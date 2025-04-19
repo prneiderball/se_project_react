@@ -1,3 +1,4 @@
+import ItemCard from "./ItemCard.jsx";
 import WeatherCard from "./WeatherCard.jsx";
 
 function Main() {
@@ -6,6 +7,7 @@ function Main() {
             <WeatherCard />
             <section className="cards">
                 <p className="cards__text">Today is 75 &deg; F / You may want to wear:</p>
+            <ItemCard />
             </section>
         </main>
     );
