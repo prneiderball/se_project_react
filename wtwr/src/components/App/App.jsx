@@ -4,11 +4,13 @@ import Main from './Main.jsx'
 import Footer from './Footer.jsx'
 
 function App() {
+  const {weatherData, setWeatherData} = useState({type: "hot"});
+
   return (
     <div className='app'>
       <div className='app__content'>
         <Header />
-        <Main />
+        <Main weatherData={weatherData} />
         <Footer />
       </div>
     </div>
