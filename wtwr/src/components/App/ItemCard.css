@@ -1,11 +1,17 @@
 .item__grid {
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(323px, 1fr));
+    gap: 20px;
+    max-width: 100%;
 }
   
   .item__card {
-    border: Mixed solid rgba(0, 0, 0, 0.3)
+    width: 323px;
+    height: 328px;
+    border: Mixed solid rgba(0, 0, 0, 0.3);
+    list-style-type: none;
+    
   }
   
   .item__image {
