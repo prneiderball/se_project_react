@@ -1,6 +1,6 @@
 import './Header.css';
-import Logo from '../../assets/wtwrlogo.svg';
-import Avatar from '../../assets/defaultavatar.svg';
+import Logo from '../../../assets/wtwrlogo.svg';
+import Avatar from '../../../assets/defaultavatar.svg';
 
 function Header() {
     const getDate = () => {

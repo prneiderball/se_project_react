@@ -1,4 +1,4 @@
-import Weathercardimage from '../../assets/weathercard.svg'
+import Weathercardimage from '../../../assets/weathercard.svg'
 import './WeatherCard.css';
 
 function WeatherCard() {

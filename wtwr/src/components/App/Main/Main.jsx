@@ -1,14 +1,14 @@
-import ItemCard from "./ItemCard.jsx";
-import WeatherCard from "./WeatherCard.jsx";
-import { defaultClothingItems } from "../../utils/Constants.js";
+import ItemCard from "../../App/ItemCard/ItemCard.jsx";
+import WeatherCard from "../../App/WeatherCard/WeatherCard.jsx";
+import { defaultClothingItems } from "../../../utils/Constants.js";
 import './Main.css';
 
 function Main({weatherData}) {
   return (
     <main>
       <WeatherCard />
-      <section className="main">
-        <p className="main__text">
+      <section className="cards">
+        <p className="cards__text">
           Today is 75 &deg; F / You may want to wear:
         </p>
         <ul className="cards__list">
