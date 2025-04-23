@@ -1,24 +1,33 @@
 import './App.css'
 import Header from '../App/Header/Header.jsx'
-import Main from './Main/Main.jsx'
-import ModalWithForm from './ModalWithForm/ModalWithForm.jsx'
+import Main from '../App/Main/Main.jsx'
+import ModalWithForm from '../App/ModalWithForm/ModalWithForm.jsx'
 import Footer from './Footer/Footer.jsx'
 import {useState} from 'react'
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "cold" });
-  const [ activeModal, setActiveModal] = useState("add-garment");
+  const [ activeModal, setActiveModal] = useState("");
+
+  const onAddClick = () => {
+    setActiveModal("add-garment");
+  }
+
+  const closeActiveModal = () => {
+    setActiveModal("");
+  }
 
   return (
     <div className='app'>
       <div className='app__content'>
-        <Header />
+        <Header onAddClick={onAddClick} />
         <Main weatherData={weatherData} />
       </div>
       <ModalWithForm 
       title="New garment" 
       buttonText="Add garment"
-      activeModal={activeModal}>
+      activeModal={activeModal}
+      closeActiveModal={closeActiveModal}>
       <label htmlFor='name' className='modal__label'>
             Name{" "}
             <input 

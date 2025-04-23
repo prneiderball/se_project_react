@@ -1,11 +1,12 @@
-import { title } from 'framer-motion/client';
 import './ModalWithForm.css';
-function ModalWithForm({title, children, buttonText, activeModal}) {
+
+function ModalWithForm({title, children, buttonText, activeModal, closeActiveModal}) {
     return (
-      <div className={'modal ${activeModal === "add-garment" && "modal--visible"}'}>
+      <div className={`modal ${activeModal === "add-garment" && "modal--visible"}`}>
         <div className="modal__content">
         <h2 className='modal__title'>{title}</h2>
         <button 
+            onClick={closeActiveModal}
             type='button' 
             className='modal__close' 
           >

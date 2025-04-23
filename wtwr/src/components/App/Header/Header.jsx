@@ -2,7 +2,7 @@ import './Header.css';
 import Logo from '../../../assets/wtwrlogo.svg';
 import Avatar from '../../../assets/defaultavatar.svg';
 
-function Header() {
+function Header({onAddClick}) {
     const getDate = () => {
         const date = new Date();
         return date.toLocaleDateString('en-US', {
@@ -15,7 +15,7 @@ function Header() {
         <header className="header">
             <img className="header__logo" src={Logo} alt="wtwr logo" />
             <p className="header__date">{getDate()}, (location)</p>
-            <button className="header__addclothes--btn">+ Add Clothes</button>
+            <button onClick={onAddClick} className="header__addclothes--btn">+ Add Clothes</button>
             <div className="header__user--container">
             <p className="header__username">Terrence Tegegne</p>
             <img className="header__avatar" src={Avatar}  alt="" />
