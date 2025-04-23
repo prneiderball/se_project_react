@@ -1,21 +1,26 @@
-.item__grid {
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(323px, 1fr));
-    gap: 20px;
-    max-width: 100%;
+.card {
+  display: flex;
+  justify-content: center;
+  width: 323px;
+  position: relative;
+  border: 1px solid #0000004d;
+  border-radius: 20px;
+  overflow: hidden;
 }
-  
-  .item__card {
-    width: 323px;
-    height: 328px;
-    border: Mixed solid rgba(0, 0, 0, 0.3);
-    list-style-type: none;
-    
-  }
-  
-  .item__image {
-    width: 100%;
-    border-radius: 6px;
-  }
+
+.card__title {
+  position: absolute;
+  top: 25px;
+  margin: 0;
+  background-color: #fff;
+  padding: 2px 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #00000099;
+  border-radius: 4px;
+}
+
+.card__image {
+  width: 100%;
+}
   
