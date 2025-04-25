@@ -36,7 +36,7 @@
 
 .modal__title {
     margin: 0 0 24px; 
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 700;
     width: 95px;
     height: 20px;
@@ -60,7 +60,7 @@
 .modal__label {
     margin-bottom: 8px;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 20px;
 }
 
@@ -83,7 +83,7 @@
 .modal__radio-legend {
     margin-bottom: 12px;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 20px;
 }
 
