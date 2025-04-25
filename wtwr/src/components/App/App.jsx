@@ -7,7 +7,7 @@ import {useState} from 'react'
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "cold" });
-  const [ activeModal, setActiveModal] = useState("");
+  const [ activeModal, setActiveModal] = useState("add-garment");
 
   const onAddClick = () => {
     setActiveModal("add-garment");
