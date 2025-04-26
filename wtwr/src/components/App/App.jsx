@@ -6,6 +6,7 @@ import ItemModal from '../App/ItemModal/ItemModal.jsx'
 import Footer from '../App/Footer/Footer.jsx'
 import {useEffect, useState} from 'react'
 import { coordinates, APIkey } from '../../utils/constants.js'
+import { getWeatherData } from '../../utils/WeatherApi.jsS'
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "cold" });
@@ -26,7 +27,15 @@ function App() {
   }
 
   useEffect(() => {
-    getWeatherData(coordinates, APIkey);
+    getWeatherData(coordinates, APIkey)
+  .then((data) => {
+    console.log(data);
+    setWeatherData(data);
+  })
+  .catch((error) => {
+    console.error("Error fetching weather data:", error);
+  })
+  }, []);
 
   return (
     <div className='app'>
