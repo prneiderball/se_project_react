@@ -2,15 +2,22 @@ import './App.css'
 import Header from '../App/Header/Header.jsx'
 import Main from '../App/Main/Main.jsx'
 import ModalWithForm from '../App/ModalWithForm/ModalWithForm.jsx'
-import Footer from './Footer/Footer.jsx'
+import ItemModal from '../App/ItemModal/ItemModal.jsx'
+import Footer from '../App/Footer/Footer.jsx'
 import {useState} from 'react'
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "cold" });
-  const [ activeModal, setActiveModal] = useState("add-garment");
+  const [ activeModal, setActiveModal] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
 
   const onAddClick = () => {
     setActiveModal("add-garment");
+  }
+
+  const onCardClick = (card) => {
+    setActiveModal("item-preview");
+    setSelectedCard(card)
   }
 
   const closeActiveModal = () => {
@@ -21,7 +28,7 @@ function App() {
     <div className='app'>
       <div className='app__content'>
         <Header onAddClick={onAddClick} />
-        <Main weatherData={weatherData} />
+        <Main weatherData={weatherData} onCardClick={onCardClick} />
       </div>
       <ModalWithForm 
       title="New garment" 
@@ -58,7 +65,7 @@ function App() {
               className='modal__label modal__label_type_radio'
             ><input 
             id="hot" type="radio" className="modal__radio-input">
-            </input> Hot
+            </input> <span>Hot</span>
             </label>
 
             <label 
@@ -66,7 +73,7 @@ function App() {
               className='modal__label modal__label_type_radio'
             ><input 
             id="warm" type="radio" className="modal__radio-input">
-            </input>Warm 
+            </input><span>Warm</span> 
             </label>
 
             <label 
@@ -74,10 +81,15 @@ function App() {
               className='modal__label modal__label_type_radio'
             ><input 
             id='cold' type="radio" className="modal__radio-input">
-            </input> Cold</label>
+            </input><span>Cold</span></label>
   
             </fieldset>
       </ModalWithForm>
+      <ItemModal 
+      activeModal= {activeModal} 
+      card={selectedCard} 
+      closeActiveModal={closeActiveModal}
+      />
     </div>
   )
 }
