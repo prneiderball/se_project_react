@@ -46,6 +46,7 @@ function App() {
       <div className="app__content">
         <Header onAddClick={onAddClick} weatherData={weatherData} />
         <Main weatherData={weatherData} onCardClick={onCardClick} />
+        <Footer />
       </div>
       <ModalWithForm
         title="New garment"
@@ -113,8 +114,6 @@ function App() {
         card={selectedCard}
         closeActiveModal={closeActiveModal}
       />
-
-      <Footer />
     </div>
   );
 }

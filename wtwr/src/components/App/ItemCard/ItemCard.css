@@ -6,6 +6,7 @@
   border: 1px solid #0000004d;
   border-radius: 20px;
   overflow: hidden;
+  margin-bottom: auto;
 }
 
 .card__title {
@@ -23,4 +24,3 @@
 .card__image {
   width: 100%;
 }
-  
