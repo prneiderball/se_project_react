@@ -1,28 +1,26 @@
 .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    background-color: #fff;
-    width: 1360px;
-    height: 40px;
-    max-width: 100%;
-    align-items: center;
-    margin: 32px 40px 28px;
-    font-size: 16px;
+  display: flex;
+  background-color: #fff;
+  width: 1360px;
+  height: 40px;
+  max-width: 100%;
+  align-items: center;
+  margin: 32px 40px 28px;
+  font-size: 16px;
 }
 
-.footer__name, .footer__year {
-    font-size: 16px;
-    font-weight: 500;
-    max-height: 20px;
+.footer__name,
+.footer__year {
+  font-size: 16px;
+  font-weight: 500;
+  max-height: 20px;
 }
 
 .footer__name {
-    margin-right: auto;
-    margin-left: 40px;
+  margin-right: auto;
+  margin-left: 40px;
 }
 
 .footer__year {
-    margin-right: 42px;
+  margin-right: 42px;
 }
