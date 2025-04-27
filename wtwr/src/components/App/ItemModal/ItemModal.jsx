@@ -1,9 +1,12 @@
 import "./ItemModal.css";
 import CloseIcon from "../../../assets/closegray.svg";
+import ItemCloseIcon from "../../../assets/closewhite.svg";
 
 function ItemModal({ activeModal, closeActiveModal, card }) {
   return (
-    <div className={`modal ${activeModal === "item-preview" && "modal--visible"}`}>
+    <div
+      className={`modal ${activeModal === "item-preview" && "modal--visible"}`}
+    >
       <div className="modal__content modal__content_type_image">
         <button
           onClick={closeActiveModal}
@@ -11,7 +14,7 @@ function ItemModal({ activeModal, closeActiveModal, card }) {
           className="modal__close"
           aria-label="Close modal"
         >
-          <img src={CloseIcon} alt="Close" />
+          <img src={ItemCloseIcon} alt="Close" />
         </button>
         <img
           src={card?.link || ""}
