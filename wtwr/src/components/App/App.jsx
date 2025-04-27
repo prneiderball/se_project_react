@@ -14,7 +14,7 @@ function App() {
     temp: { F: 999 },
     city: ""
   });
-  const [activeModal, setActiveModal] = useState("hot");
+  const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
   const onAddClick = () => {
@@ -114,6 +114,8 @@ function App() {
         card={selectedCard}
         closeActiveModal={closeActiveModal}
       />
+
+      <Footer />
     </div>
   );
 }
