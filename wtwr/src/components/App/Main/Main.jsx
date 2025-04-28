@@ -3,8 +3,6 @@ import WeatherCard from "../../App/WeatherCard/WeatherCard.jsx";
 import { defaultClothingItems } from "../../../utils/constants.js";
 import "./Main.css";
 
-const roundedTemp = Math.round(Number(weatherData.temp.F));
-
 function Main({ weatherData, onCardClick }) {
   return (
     <main>
