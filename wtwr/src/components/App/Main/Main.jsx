@@ -3,14 +3,15 @@ import WeatherCard from "../../App/WeatherCard/WeatherCard.jsx";
 import { defaultClothingItems } from "../../../utils/constants.js";
 import "./Main.css";
 
+const roundedTemp = Math.round(Number(weatherData.temp.F));
+
 function Main({ weatherData, onCardClick }) {
   return (
     <main>
       <WeatherCard weatherData={weatherData} />
       <section className="cards">
         <p className="cards__text">
-          Today is {Math.round(weatherData.temp.F)} &deg; F / You may want to
-          wear:
+          Today is {roundedTemp} &deg; F / You may want to wear:
         </p>
         <ul className="cards__list">
           {defaultClothingItems
