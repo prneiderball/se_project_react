@@ -1,4 +1,4 @@
-import Weathercardimage from "../../../assets/weathercard.svg";
+import { weatherConditions } from "../../../utils/constants";
 import "./WeatherCard.css";
 
 function WeatherCard({ weatherData }) {
@@ -6,12 +6,18 @@ function WeatherCard({ weatherData }) {
     return <div>Weather data is loading...</div>;
   }
 
+  const weatherCondition = weatherConditions.find(
+    (condition) =>
+      condition.condition === weatherData.description &&
+      condition.day === weatherData.isDayTime
+  );
+
   return (
     <section className="weather__card">
       <p className="weather__text">{weatherData.temp.F} &deg; F</p>
       <img
-        src={Weathercardimage}
-        alt="Weather Card"
+        src={weatherCondition?.url}
+        alt="Weather"
         className="weather__card_img"
       />
     </section>

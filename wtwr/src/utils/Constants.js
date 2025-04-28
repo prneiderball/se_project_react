@@ -1,3 +1,46 @@
+export const weatherConditions = [
+  {
+    day: true,
+    condition: "clear",
+    url: new URL("../assets/daytime/clear.svg", import.meta.url)
+  },
+  {
+    day: true,
+    condition: "clouds",
+    url: new URL("../assets/daytime/cloudy.svg", import.meta.url).href
+  },
+  {
+    day: true,
+    condition: "rain",
+    url: new URL("../assets/daytime/rain.svg", import.meta.url).href
+  },
+  {
+    day: true,
+    condition: "thunderstorm",
+    url: new URL("../assets/daytime/thunderstorm.svg", import.meta.url).href
+  },
+  {
+    day: false,
+    condition: "clear",
+    url: new URL("../assets/nighttime/clear.svg", import.meta.url)
+  },
+  {
+    day: false,
+    condition: "clouds",
+    url: new URL("../assets/nighttime/cloudy.svg", import.meta.url).href
+  },
+  {
+    day: false,
+    condition: "rain",
+    url: new URL("../assets/nighttime/rain.svg", import.meta.url).href
+  },
+  {
+    day: false,
+    condition: "thunderstorm",
+    url: new URL("../assets/nighttime/thunderstorm.svg", import.meta.url).href
+  }
+];
+
 export const defaultClothingItems = [
   {
     _id: 0,

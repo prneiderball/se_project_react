@@ -35,6 +35,7 @@ function App() {
       .then((data) => {
         const filteredData = parseWeatherData(data);
         setWeatherData(filteredData);
+        debugger;
       })
       .catch((error) => {
         console.error("Error fetching weather data:", error);

@@ -19,8 +19,14 @@ export function parseWeatherData(data) {
   result.city = data.name;
   result.temp = { F: data.main.temp };
   result.type = getWeatherType(result.temp.F);
+  result.description = data.weather[0].main.toLowerCase();
+  result.isDayTime = isDayTime(data.sys, Date.now());
   return result;
 }
+
+const isDayTime = ({ sunrise, sunset }, now) => {
+  return sunrise * 1000 < now && now < sunset * 1000;
+};
 
 export function getWeatherType(temp) {
   if (temp > 80) {
