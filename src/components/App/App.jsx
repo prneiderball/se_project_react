@@ -51,7 +51,7 @@ function App() {
       <ModalWithForm
         title="Add Garment"
         buttonText="Add"
-        isOpen={activeModal === "add-garment"}
+        isOpen={!!activeModal}
         closeActiveModal={closeActiveModal}
       >
         <label htmlFor="name" className="modal__label">
@@ -89,10 +89,7 @@ function App() {
             <span>Hot</span>
           </label>
 
-          <label
-            htmlFor="warm"
-            className="modal__label modal__label_type_radio"
-          >
+          <label htmlFor="warm" className="modal__label modal__label_type_radio">
             <input
               id="warm"
               name="temperature"
@@ -102,10 +99,7 @@ function App() {
             <span>Warm</span>
           </label>
 
-          <label
-            htmlFor="cold"
-            className="modal__label modal__label_type_radio"
-          >
+          <label htmlFor="cold" className="modal__label modal__label_type_radio">
             <input
               id="cold"
               name="temperature"
@@ -124,4 +118,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
