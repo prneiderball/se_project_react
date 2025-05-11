@@ -1,5 +1,4 @@
-import shortsImg from '../assets/shorts.svg';
-
+const shortsImg = new URL('../assets/shorts.svg', import.meta.url).href;
 
 export const weatherConditions = [
   {
@@ -84,7 +83,7 @@ export const defaultClothingItems = [
 
   {
   _id: 6,
-    name: "Shorts",
+    name: "",
     weather: "warm",
     link: shortsImg
   },
