@@ -10,10 +10,13 @@ import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
-    type: "",
-    temp: { F: 0 },
-    city: "",
-  });
+  type: "",
+  temp: { F: 0 },
+  city: "",
+  description: "",
+  isDayTime: true,
+});
+
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 

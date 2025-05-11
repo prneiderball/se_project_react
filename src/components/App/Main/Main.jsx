@@ -5,7 +5,7 @@ import "./Main.css";
 
 function Main({ weatherData, onCardClick }) {
   console.log (weatherData);
-  const roundedTemp = Math.round(weatherData.temperature);
+  const roundedTemp = Math.round(weatherData.temp.F);
   
   return (
     <main>
