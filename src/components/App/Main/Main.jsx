@@ -4,10 +4,6 @@ import { defaultClothingItems } from "../../../utils/constants.js";
 import "./Main.css";
 
 function Main({ weatherData, onCardClick }) {
-console.log("weatherData:", weatherData);
-console.log("weatherData.temp:", weatherData?.temp);
-console.log("weatherData.temp.F:", weatherData?.temp?.F);
-
 const roundedTemp = weatherData?.temp?.F !== undefined ? Math.round(weatherData.temp.F) : "Loading...";  return (
     <main>
       <WeatherCard weatherData={weatherData} />
