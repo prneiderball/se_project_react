@@ -4,7 +4,11 @@ import { defaultClothingItems } from "../../../utils/constants.js";
 import "./Main.css";
 
 function Main({ weatherData, onCardClick }) {
-const roundedTemp = weatherData?.temp?.F !== undefined ? Math.round(weatherData.temp.F) : "Loading...";  return (
+  const roundedTemp =
+    weatherData?.temp?.F !== undefined
+      ? Math.round(weatherData.temp.F)
+      : "Loading...";
+  return (
     <main>
       <WeatherCard weatherData={weatherData} />
       <section className="cards">
@@ -13,7 +17,11 @@ const roundedTemp = weatherData?.temp?.F !== undefined ? Math.round(weatherData.
         </p>
         <ul className="cards__list">
           {defaultClothingItems
-            .filter((item) => item.weather === weatherData.type)
+            .filter((item) =>
+              Array.isArray(item.weather)
+                ? item.weather.includes(weatherData.type)
+                : item.weather === weatherData.type
+            )
             .map((item) => (
               <ItemCard
                 key={item._id}
