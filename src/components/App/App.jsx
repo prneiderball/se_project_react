@@ -11,7 +11,7 @@ import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
 function App() {
   const [weatherData, setWeatherData] = useState({
   type: "",
-  temp: { F: 0 },
+  temp: { F: 0.00 },
   city: "",
   description: "",
   isDayTime: true,
