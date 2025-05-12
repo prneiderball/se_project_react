@@ -5,49 +5,49 @@ export const weatherConditions = [
     day: true,
     condition: "clear",
     url: new URL("../assets/daytime/clear.svg", import.meta.url),
-    gradient: "linear-gradient(to top, #a1c4fd, #c2e9fb)", // light blue sky
+    gradient: "linear-gradient(to top, #a1c4fd, #c2e9fb)", 
   },
   {
     day: true,
     condition: "clouds",
     url: new URL("../assets/daytime/clouds.svg", import.meta.url).href,
-    gradient: "linear-gradient(to top, #d7d2cc, #304352)", // gray clouds
+    gradient: "linear-gradient(to top, #d7d2cc, #304352)",
   },
   {
     day: true,
     condition: "rain",
     url: new URL("../assets/daytime/rain.svg", import.meta.url).href,
-    gradient: "linear-gradient(to top, #4b6cb7, #182848)", // blue-gray rainy
+    gradient: "linear-gradient(to top, #4b6cb7, #182848)", 
   },
   {
     day: true,
     condition: "thunderstorm",
     url: new URL("../assets/daytime/thunderstorm.svg", import.meta.url).href,
-    gradient: "linear-gradient(to top, #0f2027, #203a43, #2c5364)", // stormy
+    gradient: "linear-gradient(to top, #0f2027, #203a43, #2c5364)",
   },
   {
     day: false,
     condition: "clear",
     url: new URL("../assets/nighttime/clear.svg", import.meta.url),
-    gradient: "linear-gradient(to top,rgb(44, 49, 80), #4ca1af)", // deep night sky
+    gradient: "linear-gradient(to top,rgb(44, 49, 80), #4ca1af)",
   },
   {
     day: false,
     condition: "clouds",
     url: new URL("../assets/nighttime/clouds.svg", import.meta.url).href,
-    gradient: "linear-gradient(to top, #485563, #29323c)", // moody clouds
+    gradient: "linear-gradient(to top, #485563, #29323c)",
   },
   {
     day: false,
     condition: "rain",
     url: new URL("../assets/nighttime/rain.svg", import.meta.url).href,
-    gradient: "linear-gradient(to top, #000c40, #607d8b)", // rainy night
+    gradient: "linear-gradient(to top, #000c40, #607d8b)",
   },
   {
     day: false,
     condition: "thunderstorm",
     url: new URL("../assets/nighttime/thunderstorm.svg", import.meta.url).href,
-    gradient: "linear-gradient(to top, #232526, #414345)", // dark storm
+    gradient: "linear-gradient(to top, #232526, #414345)",
   },
 ];
 
