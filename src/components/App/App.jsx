@@ -7,15 +7,21 @@ import Footer from "../App/Footer/Footer.jsx";
 import { useEffect, useState } from "react";
 import { coordinates, APIkey } from "../../utils/constants.js";
 import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
+import { getGradient } from "../../utils/getGradient.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
-  type: "",
-  temp: { F: 0.00 },
-  city: "",
-  description: "",
-  isDayTime: true,
-});
+    type: "",
+    temp: { F: 0.0 },
+    city: "",
+    description: "",
+    isDayTime: true,
+  });
+
+  const backgroundStyle = {
+    background: getGradient(weatherData.type, weatherData.isDayTime),
+    minHeight: "100vh",
+  };
 
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -45,7 +51,7 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
+    <div className="app" style={backgroundStyle}>
       <div className="app__content">
         <Header onAddClick={onAddClick} weatherData={weatherData} />
         <Main weatherData={weatherData} onCardClick={onCardClick} />
@@ -92,7 +98,10 @@ function App() {
             <span>Hot</span>
           </label>
 
-          <label htmlFor="warm" className="modal__label modal__label_type_radio">
+          <label
+            htmlFor="warm"
+            className="modal__label modal__label_type_radio"
+          >
             <input
               id="warm"
               name="temperature"
@@ -102,7 +111,10 @@ function App() {
             <span>Warm</span>
           </label>
 
-          <label htmlFor="cold" className="modal__label modal__label_type_radio">
+          <label
+            htmlFor="cold"
+            className="modal__label modal__label_type_radio"
+          >
             <input
               id="cold"
               name="temperature"
