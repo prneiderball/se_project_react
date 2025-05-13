@@ -24,7 +24,7 @@ export function parseWeatherData(data) {
   return result;
 }
 
-const isDayTime = ({ sunrise, sunset }, now) => {
+export const isDayTime = ({ sunrise, sunset }, now) => {
   return sunrise * 1000 < now && now < sunset * 1000;
 };
 

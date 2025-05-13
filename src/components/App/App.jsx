@@ -18,6 +18,9 @@ function App() {
     isDayTime: true,
   });
 
+console.log("Weather Data before gradient:", weatherData);
+console.log(getGradient)
+
   const backgroundStyle = {
     background: getGradient(weatherData.type, weatherData.isDayTime),
     minHeight: "100vh",
