@@ -7,7 +7,6 @@ import Footer from "../App/Footer/Footer.jsx";
 import { useEffect, useState } from "react";
 import { coordinates, APIkey } from "../../utils/constants.js";
 import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
-import { getGradient } from "../../utils/getGradient.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -17,14 +16,6 @@ function App() {
     description: "",
     isDayTime: true,
   });
-
-console.log("Weather Data before gradient:", weatherData);
-console.log(getGradient)
-
-  const backgroundStyle = {
-    background: getGradient(weatherData.type, weatherData.isDayTime),
-    minHeight: "100vh",
-  };
 
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -54,7 +45,7 @@ console.log(getGradient)
   }, []);
 
   return (
-    <div className="app" style={backgroundStyle}>
+    <div className="app">
       <div className="app__content">
         <Header onAddClick={onAddClick} weatherData={weatherData} />
         <Main weatherData={weatherData} onCardClick={onCardClick} />
