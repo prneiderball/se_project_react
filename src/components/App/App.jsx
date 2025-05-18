@@ -11,7 +11,7 @@ import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",
-    temp: { F: 0.0 },
+    temp: { F: 0.0, C: 0.0 },
     city: "",
     description: "",
     isDayTime: true,
@@ -44,10 +44,21 @@ function App() {
       });
   }, []);
 
+  const [isCelsius, setIsCelsius] = useState(true);
+
+  const handleUnitToggle = (value) => {
+    setIsCelsius(value);
+  };
+
   return (
     <div className="app">
       <div className="app__content">
-        <Header onAddClick={onAddClick} weatherData={weatherData} />
+        <Header
+          onAddClick={onAddClick}
+          weatherData={weatherData}
+          isCelsius={isCelsius}
+          onUnitToggle={handleUnitToggle}
+        />
         <Main weatherData={weatherData} onCardClick={onCardClick} />
         <Footer />
       </div>

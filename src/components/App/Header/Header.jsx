@@ -1,6 +1,7 @@
 import "./Header.css";
 import Logo from "../../../assets/wtwrlogo.svg";
 import Avatar from "../../../assets/defaultavatar.svg";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
 
 function Header({ onAddClick, weatherData }) {
   const getDate = () => {
@@ -17,6 +18,7 @@ function Header({ onAddClick, weatherData }) {
       <p className="header__date">
         {getDate()}, {weatherData.city}
       </p>
+      <ToggleSwitch isCelsius={isCelsius} onToggle={onUnitToggle} />
       <button onClick={onAddClick} className="header__addclothes--btn">
         + Add Clothes
       </button>
