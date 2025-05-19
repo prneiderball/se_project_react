@@ -20,21 +20,21 @@
     height: 28px;
     background-color: #000;
     border-radius: 50%;
-    transition: transform 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 .toggle-switch__text {
-    color: #000;
+    color: #7e7e7e;
     position: absolute;
+    top: 5px;
 }
 
 .toggle-switch__text_F {
-    top: 6px;
-    left: 10;
+    left: 9px;
+    
 }
 
 .toggle-switch__text_C {
-    top: 6px;
     right: 10px;
 }
 
