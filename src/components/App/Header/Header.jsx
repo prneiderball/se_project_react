@@ -18,13 +18,17 @@ function Header({ onAddClick, weatherData }) {
       <p className="header__date">
         {getDate()}, {weatherData.city}
       </p>
-      <ToggleSwitch isCelsius={isCelsius} onToggle={onUnitToggle} />
+      <ToggleSwitch />
       <button onClick={onAddClick} className="header__addclothes--btn">
         + Add Clothes
       </button>
       <div className="header__user--container">
         <p className="header__username">Terrence Tegegne</p>
-        <img className="header__avatar" src={Avatar} alt="User profile picture" />
+        <img
+          className="header__avatar"
+          src={Avatar}
+          alt="User profile picture"
+        />
       </div>
     </header>
   );

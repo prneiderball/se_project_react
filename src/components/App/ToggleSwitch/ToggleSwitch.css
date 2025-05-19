@@ -1,0 +1,44 @@
+.toggle-switch {
+    margin-left: auto;
+    width: 56px;
+    height: 28px;
+    border: 2px solid #7e7e7e;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+
+.toggle-switch__checkbox {
+    opacity: 0;
+}
+
+.toggle-switch__slider {
+    position: absolute;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    background-color: #000;
+    border-radius: 50%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.toggle-switch__text {
+    color: #000;
+    position: absolute;
+}
+
+.toggle-switch__text_F {
+    top: 6px;
+    left: 10;
+}
+
+.toggle-switch__text_C {
+    top: 6px;
+    right: 10px;
+}
+
+.toggle-switch__checkbox:checked + .toggle-switch__slider {
+    transform: translateX(28px);
+}
+    
