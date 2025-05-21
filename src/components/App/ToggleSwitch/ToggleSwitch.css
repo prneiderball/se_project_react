@@ -38,7 +38,12 @@
     right: 10px;
 }
 
+
+
 .toggle-switch__checkbox:checked + .toggle-switch__slider {
     transform: translateX(28px);
 }
-    
+
+.toggle-switch__slider::selection {
+    color: #fff;
+}    
