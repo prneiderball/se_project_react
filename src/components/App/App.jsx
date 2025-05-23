@@ -18,8 +18,6 @@ function App() {
     isDayTime: true,
   });
 
-  console.log("Weather data:", weatherData);
-
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");

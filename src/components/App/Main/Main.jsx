@@ -1,26 +1,29 @@
+import React, { useContext } from "react";
 import ItemCard from "../../App/ItemCard/ItemCard.jsx";
 import WeatherCard from "../../App/WeatherCard/WeatherCard.jsx";
 import { defaultClothingItems } from "../../../utils/constants.js";
 import "./Main.css";
+import CurrentTemperatureUnitContext from "../../../utils/CurrentTemperatureUnit.jsx";
 
 function Main({ weatherData, onCardClick }) {
-  const roundedTemp =
-    weatherData?.temp?.F !== undefined
-      ? Math.round(weatherData.temp.F)
-      : "Loading...";
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext); // ✅ correct
+
+  const temperature =
+    currentTemperatureUnit === "F" ? weatherData?.temp?.F : weatherData?.temp?.C;
+
   return (
     <main>
       <WeatherCard weatherData={weatherData} />
       <section className="cards">
         <p className="cards__text">
-          Today is {roundedTemp} &deg; F / You may want to wear:
+          Today is {temperature ?? "Loading..."} &deg; / You may want to wear:
         </p>
         <ul className="cards__list">
           {defaultClothingItems
             .filter((item) =>
               Array.isArray(item.weather)
-                ? item.weather.includes(weatherData.type)
-                : item.weather === weatherData.type
+                ? item.weather.includes(weatherData?.type)
+                : item.weather === weatherData?.type
             )
             .map((item) => (
               <ItemCard
