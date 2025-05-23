@@ -9,8 +9,6 @@ function WeatherCard({ weatherData }) {
     return <div>Weather data is loading...</div>;
   }
 
-  const roundedTemp = Math.round(Number(weatherData.temp.F));
-
   const weatherCondition = weatherConditions.find(
     (condition) =>
       condition.condition === weatherData.description &&
@@ -19,7 +17,7 @@ function WeatherCard({ weatherData }) {
 
   return (
     <section className="weather__card">
-      <p className="weather__text">{roundedTemp} &deg; F</p>
+      <p className="weather__text">{currentTemperatureUnit==='F'? weatherData.temp.F : weatherData.temp.C} &deg;{currentTemperatureUnit}</p>
       <img
         src={weatherCondition?.url}
         alt="Weather"
