@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { weatherConditions } from "../../../utils/constants";
+import CurrentTemperatureUnitContext from "../../../utils/CurrentTemperatureUnit";
 import "./WeatherCard.css";
 
 function WeatherCard({ weatherData }) {
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   if (!weatherData || !weatherData.temp || weatherData.temp.F === undefined) {
     return <div>Weather data is loading...</div>;
   }
