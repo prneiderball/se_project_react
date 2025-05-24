@@ -7,10 +7,10 @@ import AddItemModal from "../App/AddItemModal/AddItemModal.jsx";
 import ItemModal from "../App/ItemModal/ItemModal.jsx";
 import Footer from "../App/Footer/Footer.jsx";
 import { useEffect, useState } from "react";
-import { coordinates, APIkey } from "../../utils/constants.js";
+import { coordinates, APIkey } from "../../utils/Constants.js";
 import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
 import CurrentTemperatureUnitContext from "../../utils/CurrentTemperatureUnit.jsx";
-import { defaultClothingItems } from "../../utils/constants.js";
+import { defaultClothingItems } from "../../utils/Constants.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
