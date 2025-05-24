@@ -64,8 +64,6 @@ function App() {
     ]);
     closeActiveModal();
   };
-  console.log("clothingItems", clothingItems);
-
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
