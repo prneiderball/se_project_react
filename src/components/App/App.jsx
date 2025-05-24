@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Header from "../App/Header/Header.jsx";
 import Main from "../App/Main/Main.jsx";
+import Profile from "../App/Profile/Profile.jsx";
 import AddItemModal from "../App/AddItemModal/AddItemModal.jsx";
 import ItemModal from "../App/ItemModal/ItemModal.jsx";
 import Footer from "../App/Footer/Footer.jsx";
@@ -87,7 +88,7 @@ function App() {
                 />
               }
             />
-            <Route path="/profile" element={<p>PROFILE</p>} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
           <Footer />
         </div>
