@@ -5,11 +5,12 @@ import { defaultClothingItems } from "../../../utils/constants.js";
 import "./Main.css";
 import CurrentTemperatureUnitContext from "../../../utils/CurrentTemperatureUnit.jsx";
 
-function Main({ weatherData, onCardClick }) {
-  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext); // ✅ correct
-
+function Main({ weatherData, onCardClick, clothingItems }) {
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temperature =
-    currentTemperatureUnit === "F" ? weatherData?.temp?.F : weatherData?.temp?.C;
+    currentTemperatureUnit === "F"
+      ? weatherData?.temp?.F
+      : weatherData?.temp?.C;
 
   return (
     <main>
@@ -19,7 +20,7 @@ function Main({ weatherData, onCardClick }) {
           Today is {temperature ?? "Loading..."} &deg; / You may want to wear:
         </p>
         <ul className="cards__list">
-          {defaultClothingItems
+          {clothingItems
             .filter((item) =>
               Array.isArray(item.weather)
                 ? item.weather.includes(weatherData?.type)
