@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ItemCard from "../../App/ItemCard/ItemCard.jsx";
 import WeatherCard from "../../App/WeatherCard/WeatherCard.jsx";
 import { defaultClothingItems } from "../../../utils/constants.js";

@@ -1,4 +1,5 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
 import Header from "../App/Header/Header.jsx";
 import Main from "../App/Main/Main.jsx";
 import AddItemModal from "../App/AddItemModal/AddItemModal.jsx";
@@ -57,7 +58,10 @@ function App() {
   };
 
   const handleAddItemSubmit = (name, imageURL, temperature) => {
-    setClothingItems([{ name, link: imageURL, weather: temperature }, ...clothingItems]);
+    setClothingItems([
+      { name, link: imageURL, weather: temperature },
+      ...clothingItems,
+    ]);
     closeActiveModal();
   };
   console.log("clothingItems", clothingItems);
@@ -74,11 +78,19 @@ function App() {
             isCelsius={isCelsius}
             onUnitToggle={handleUnitToggle}
           />
-          <Main
-            weatherData={weatherData}
-            onCardClick={onCardClick}
-            clothingItems={clothingItems}
-          />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  onCardClick={onCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            />
+            <Route path="/profile" element={<p>PROFILE</p>} />
+          </Routes>
           <Footer />
         </div>
         <AddItemModal
