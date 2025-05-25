@@ -4,7 +4,7 @@ import ClothesSection from "../ClothesSection/ClothesSection.jsx";
 
 function Profile() {
   return (
-    <div>
+    <div className="profile">
       <section className="profile__sidebar">
         <SideBar />
       </section>

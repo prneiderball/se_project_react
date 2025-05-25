@@ -88,7 +88,7 @@ function App() {
                 />
               }
             />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile onCardClick={onCardClick}/>} />
           </Routes>
           <Footer />
         </div>

@@ -1,6 +1,7 @@
 .sidebar {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  width: 289px;
 }
 
 .sidebar__username {
@@ -11,7 +12,7 @@
     height: 25px;
 }
 
-.img {
+.sidebar img {
     width: 56px;
     height: 56px;
 }
