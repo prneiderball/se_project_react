@@ -20,19 +20,18 @@ function ItemModal({ activeModal, closeActiveModal, card, onDelete }) {
           alt={card?.name || "Item"}
           className="modal__image"
         />
-        <button
-          onClick={async () => {
-            await onDelete(card?._id);
-            closeActiveModal();
-          }}
-          type="button"
-          className="modal__delete"
-          aria-label="Delete item"
-        >
-          Delete
-        </button>
-
         <div className="modal__footer">
+                    <button
+            onClick={async () => {
+              await onDelete(card?._id);
+              closeActiveModal();
+            }}
+            type="button"
+            className="modal__delete"
+            aria-label="Delete item"
+          >
+            Delete item
+          </button>
           <h2 className="modal__caption">{card?.name || "No name"}</h2>
           <p className="modal__weather">Weather: {card?.weather || "N/A"}</p>
         </div>
