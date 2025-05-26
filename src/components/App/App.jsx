@@ -11,7 +11,7 @@ import { coordinates, APIkey } from "../../utils/constants.js";
 import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
 import CurrentTemperatureUnitContext from "../../utils/CurrentTemperatureUnit.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
-import { fetchClothingItems } from "../../utils/api.js";
+import { fetchClothingItems, postNewItem, deleteItem } from "../../utils/apiService.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -21,10 +21,23 @@ function App() {
     description: "",
     isDayTime: true,
   });
+
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+
+  const handleItemDelete = (itemId) => {
+    deleteItem(itemId)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== itemId)
+        );
+      })
+      .catch((err) => {
+        console.error("Failed to delete item:", err);
+      });
+  };
 
   const onAddClick = () => {
     setActiveModal("add-garment");
@@ -54,29 +67,42 @@ function App() {
       });
   }, []);
 
-useEffect(() => {
-  fetchClothingItems()
-    .then((data) => {
-      const normalized = data.map((item) => ({
-        ...item,
-        link: item.imageUrl,
-      }));
-      setClothingItems(normalized.length === 0 ? defaultClothingItems : normalized);
-    })
-    .catch((error) => {
-      console.error("Error loading items:", error);
-    });
-}, []);
-
-
+  useEffect(() => {
+    fetchClothingItems()
+      .then((data) => {
+        const normalized = data.map((item) => ({
+          ...item,
+          link: item.imageUrl,
+        }));
+        setClothingItems(normalized.length === 0 ? defaultClothingItems : normalized);
+      })
+      .catch((error) => {
+        console.error("Error loading items:", error);
+      });
+  }, []);
 
   const handleAddItemSubmit = (name, imageURL, temperature) => {
-    setClothingItems([
-      { name, link: imageURL, weather: temperature },
-      ...clothingItems,
-    ]);
-    closeActiveModal();
+    const newItem = {
+      name,
+      imageUrl: imageURL,
+      weather: temperature,
+    };
+
+    postNewItem(newItem)
+      .then((savedItem) => {
+        const normalizedItem = {
+          ...savedItem,
+          link: savedItem.imageUrl,
+        };
+
+        setClothingItems((prevItems) => [normalizedItem, ...prevItems]);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error("Failed to add item:", err);
+      });
   };
+
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -97,6 +123,7 @@ useEffect(() => {
                   weatherData={weatherData}
                   onCardClick={onCardClick}
                   clothingItems={clothingItems}
+                  handleItemDelete={handleItemDelete}
                 />
               }
             />
@@ -116,6 +143,7 @@ useEffect(() => {
           activeModal={activeModal}
           card={selectedCard}
           closeActiveModal={closeActiveModal}
+          onDelete={handleItemDelete}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>
