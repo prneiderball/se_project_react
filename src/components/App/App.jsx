@@ -7,10 +7,11 @@ import AddItemModal from "../App/AddItemModal/AddItemModal.jsx";
 import ItemModal from "../App/ItemModal/ItemModal.jsx";
 import Footer from "../App/Footer/Footer.jsx";
 import { useEffect, useState } from "react";
-import { coordinates, APIkey } from "../../utils/Constants.js";
+import { coordinates, APIkey } from "../../utils/constants.js";
 import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
 import CurrentTemperatureUnitContext from "../../utils/CurrentTemperatureUnit.jsx";
-import { defaultClothingItems } from "../../utils/Constants.js";
+import { defaultClothingItems } from "../../utils/constants.js";
+import { fetchClothingItems } from "../../utils/api.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -53,10 +54,21 @@ function App() {
       });
   }, []);
 
-  const [isCelsius, setIsCelsius] = useState(true);
-  const handleUnitToggle = (value) => {
-    setIsCelsius(value);
-  };
+useEffect(() => {
+  fetchClothingItems()
+    .then((data) => {
+      const normalized = data.map((item) => ({
+        ...item,
+        link: item.imageUrl,
+      }));
+      setClothingItems(normalized.length === 0 ? defaultClothingItems : normalized);
+    })
+    .catch((error) => {
+      console.error("Error loading items:", error);
+    });
+}, []);
+
+
 
   const handleAddItemSubmit = (name, imageURL, temperature) => {
     setClothingItems([
@@ -74,8 +86,8 @@ function App() {
           <Header
             onAddClick={onAddClick}
             weatherData={weatherData}
-            isCelsius={isCelsius}
-            onUnitToggle={handleUnitToggle}
+            isCelsius={currentTemperatureUnit === "C"}
+            onUnitToggle={handleToggleSwitchChange}
           />
           <Routes>
             <Route
@@ -88,7 +100,10 @@ function App() {
                 />
               }
             />
-            <Route path="/profile" element={<Profile onCardClick={onCardClick}/>} />
+            <Route
+              path="/profile"
+              element={<Profile onCardClick={onCardClick} />}
+            />
           </Routes>
           <Footer />
         </div>
