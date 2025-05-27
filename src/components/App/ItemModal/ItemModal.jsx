@@ -1,7 +1,12 @@
 import "./ItemModal.css";
 import ItemCloseIcon from "../../../assets/closewhite.svg";
 
-function ItemModal({ activeModal, closeActiveModal, card, onDelete }) {
+function ItemModal({
+  activeModal,
+  closeActiveModal,
+  card,
+  onConfirmDeleteRequest,
+}) {
   return (
     <div
       className={`modal ${activeModal === "item-preview" && "modal--visible"}`}
@@ -21,11 +26,8 @@ function ItemModal({ activeModal, closeActiveModal, card, onDelete }) {
           className="modal__image"
         />
         <div className="modal__footer">
-                    <button
-            onClick={async () => {
-              await onDelete(card?._id);
-              closeActiveModal();
-            }}
+          <button
+            onClick={() => onConfirmDeleteRequest(card?._id)}
             type="button"
             className="modal__delete"
             aria-label="Delete item"

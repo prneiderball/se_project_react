@@ -5,13 +5,17 @@ import Main from "../App/Main/Main.jsx";
 import Profile from "../App/Profile/Profile.jsx";
 import AddItemModal from "../App/AddItemModal/AddItemModal.jsx";
 import ItemModal from "../App/ItemModal/ItemModal.jsx";
+import DeleteModal from "../App/DeleteModal/DeleteModal.jsx";
 import Footer from "../App/Footer/Footer.jsx";
 import { useEffect, useState } from "react";
-import { coordinates, APIkey } from "../../utils/constants.js";
+import { coordinates, APIkey, defaultClothingItems } from "../../utils/constants.js";
 import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
 import CurrentTemperatureUnitContext from "../../utils/CurrentTemperatureUnit.jsx";
-import { defaultClothingItems } from "../../utils/constants.js";
-import { fetchClothingItems, postNewItem, deleteItem } from "../../utils/apiService.js";
+import {
+  fetchClothingItems,
+  postNewItem,
+  deleteItem,
+} from "../../utils/apiService.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -25,7 +29,21 @@ function App() {
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [deleteTarget, setDeleteTarget] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+
+  const handleConfirmDeleteRequest = (itemId) => {
+    setDeleteTarget(itemId);
+    setActiveModal("delete-confirmation");
+  };
+
+  const handleConfirmDelete = () => {
+    if (deleteTarget) {
+      handleItemDelete(deleteTarget);
+      setDeleteTarget(null);
+      closeActiveModal();
+    }
+  };
 
   const handleItemDelete = (itemId) => {
     deleteItem(itemId)
@@ -74,7 +92,9 @@ function App() {
           ...item,
           link: item.imageUrl,
         }));
-        setClothingItems(normalized.length === 0 ? defaultClothingItems : normalized);
+        setClothingItems(
+          normalized.length === 0 ? defaultClothingItems : normalized
+        );
       })
       .catch((error) => {
         console.error("Error loading items:", error);
@@ -144,6 +164,15 @@ function App() {
           card={selectedCard}
           closeActiveModal={closeActiveModal}
           onDelete={handleItemDelete}
+          onConfirmDeleteRequest={handleConfirmDeleteRequest}
+        />
+        <DeleteModal
+          isOpen={activeModal === "delete-confirmation"}
+          onConfirm={handleConfirmDelete}
+          onCancel={() => {
+            setDeleteTarget(null);
+            closeActiveModal();
+          }}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>
