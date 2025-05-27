@@ -144,6 +144,7 @@ function App() {
                   onCardClick={onCardClick}
                   clothingItems={clothingItems}
                   handleItemDelete={handleItemDelete}
+                  handleConfirmDeleteRequest={handleConfirmDeleteRequest}
                 />
               }
             />

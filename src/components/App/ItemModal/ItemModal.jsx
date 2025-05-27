@@ -1,12 +1,7 @@
 import "./ItemModal.css";
 import ItemCloseIcon from "../../../assets/closewhite.svg";
 
-function ItemModal({
-  activeModal,
-  closeActiveModal,
-  card,
-  onDelete,
-}) {
+function ItemModal({ activeModal, closeActiveModal, card, onDelete }) {
   return (
     <div
       className={`modal ${activeModal === "item-preview" && "modal--visible"}`}
@@ -34,6 +29,7 @@ function ItemModal({
           >
             Delete item
           </button>
+
           <h2 className="modal__caption">{card?.name || "No name"}</h2>
           <p className="modal__weather">Weather: {card?.weather || "N/A"}</p>
         </div>
