@@ -4,7 +4,7 @@ import WeatherCard from "../../App/WeatherCard/WeatherCard.jsx";
 import "./Main.css";
 import CurrentTemperatureUnitContext from "../../../utils/CurrentTemperatureUnit.jsx";
 
-function Main({ weatherData, onCardClick, clothingItems }) {
+function Main({ weatherData, onCardClick, clothingItems, handleItemDelete }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const temperature =
@@ -34,7 +34,7 @@ function Main({ weatherData, onCardClick, clothingItems }) {
         <ul className="cards__list">
           {filteredItems.length > 0 ? (
             filteredItems.map((item) => (
-              <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+              <ItemCard key={item._id} item={item} onCardClick={onCardClick} onDelete={handleItemDelete} />
             ))
           ) : (
             <p className="cards__empty">

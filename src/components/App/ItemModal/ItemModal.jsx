@@ -5,7 +5,7 @@ function ItemModal({
   activeModal,
   closeActiveModal,
   card,
-  onConfirmDeleteRequest,
+  onDelete,
 }) {
   return (
     <div
@@ -27,7 +27,7 @@ function ItemModal({
         />
         <div className="modal__footer">
           <button
-            onClick={() => onConfirmDeleteRequest(card?._id)}
+            onClick={() => onDelete(card?._id)}
             type="button"
             className="modal__delete"
             aria-label="Delete item"

@@ -4,7 +4,7 @@ import Header from "../App/Header/Header.jsx";
 import Main from "../App/Main/Main.jsx";
 import Profile from "../App/Profile/Profile.jsx";
 import AddItemModal from "../App/AddItemModal/AddItemModal.jsx";
-import ItemModal from "../App/ItemModal/ItemModal.jsx";
+import ItemModal from "../App/ItemModal/ItemModal";
 import DeleteModal from "../App/DeleteModal/DeleteModal.jsx";
 import Footer from "../App/Footer/Footer.jsx";
 import { useEffect, useState } from "react";
