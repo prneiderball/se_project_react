@@ -4,7 +4,7 @@ import Avatar from "../../../assets/defaultavatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
 import { Link } from "react-router-dom";
 
-function Header({ onAddClick, weatherData }) {
+export function Header({ onAddClick, weatherData }) {
   const getDate = () => {
     const date = new Date();
     return date.toLocaleDateString("en-US", {
@@ -37,6 +37,4 @@ function Header({ onAddClick, weatherData }) {
       </Link>
     </header>
   );
-}
-
-export default Header;
+};
