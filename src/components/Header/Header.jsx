@@ -1,6 +1,6 @@
 import "./Header.css";
-import Logo from "../../../assets/wtwrlogo.svg";
-import Avatar from "../../../assets/defaultavatar.svg";
+import Logo from "../../assets/wtwrlogo.svg";
+import Avatar from "../../assets/defaultavatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
 import { Link } from "react-router-dom";
 
@@ -38,3 +38,5 @@ export function Header({ onAddClick, weatherData }) {
     </header>
   );
 };
+
+export default Header;

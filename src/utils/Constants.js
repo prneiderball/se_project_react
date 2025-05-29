@@ -1,5 +1,3 @@
-const shortsImg = new URL("../assets/shorts.svg", import.meta.url).href;
-
 export const weatherConditions = [
   {
     day: true,
@@ -79,13 +77,6 @@ export const defaultClothingItems = [
     name: "Coat",
     weather: "cold",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
-  },
-
-  {
-    _id: 6,
-    name: "shorts",
-    weather: ["warm", "hot"],
-    link: shortsImg,
   },
 ];
 

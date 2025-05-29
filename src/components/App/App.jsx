@@ -1,16 +1,16 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Header from "../App/Header/Header.jsx";
-import Main from "../App/Main/Main.jsx";
-import Profile from "../App/Profile/Profile.jsx";
-import AddItemModal from "../App/AddItemModal/AddItemModal.jsx";
-import ItemModal from "../App/ItemModal/ItemModal";
-import DeleteModal from "../App/DeleteModal/DeleteModal.jsx";
-import Footer from "../App/Footer/Footer.jsx";
+import Header from "../Header/Header.jsx";
+import Main from "../Main/Main.jsx";
+import Profile from "../Profile/Profile.jsx";
+import AddItemModal from "../AddItemModal/AddItemModal.jsx";
+import ItemModal from "../ItemModal/ItemModal";
+import DeleteModal from "../DeleteModal/DeleteModal.jsx";
+import Footer from "../Footer/Footer.jsx";
 import { useEffect, useState } from "react";
 import { coordinates, APIkey, defaultClothingItems } from "../../utils/constants.js";
 import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
-import CurrentTemperatureUnitContext from "../../utils/CurrentTemperatureUnit.jsx";
+import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit.jsx";
 import {
   fetchClothingItems,
   postNewItem,
