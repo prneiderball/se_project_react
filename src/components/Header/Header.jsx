@@ -22,11 +22,11 @@ export function Header({ onAddClick, weatherData }) {
         {getDate()}, {weatherData.city}
       </p>
       <ToggleSwitch />
-      <button onClick={onAddClick} className="header__addclothes--btn">
+      <button onClick={onAddClick} className="header__add-clothes-btn">
         + Add Clothes
       </button>
       <Link to="/profile" className="header__profile-link">
-        <div className="header__user--container">
+        <div className="header__user-container">
           <p className="header__username">Terrence Tegegne</p>
           <img
             className="header__avatar"
