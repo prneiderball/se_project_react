@@ -150,7 +150,7 @@ function App() {
             />
             <Route
               path="/profile"
-              element={<Profile onCardClick={onCardClick} />}
+              element={<Profile onCardClick={onCardClick} onAddClick={onAddClick}/>}
             />
           </Routes>
           <Footer />

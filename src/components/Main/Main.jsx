@@ -4,7 +4,7 @@ import WeatherCard from "../WeatherCard/WeatherCard.jsx";
 import "./Main.css";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit.jsx";
 
-function Main({ weatherData, onCardClick, clothingItems, handleItemDelete, handleConfirmDeleteRequest }) {
+function Main({ weatherData, onCardClick, clothingItems, handleItemDelete, handleConfirmDeleteRequest, handleaddItemSubmit }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const temperature =
