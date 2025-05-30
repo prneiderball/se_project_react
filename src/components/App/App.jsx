@@ -62,7 +62,7 @@ function App() {
   };
 
   const onCardClick = (card) => {
-    setActiveModal("item-preview");
+    setActiveModal("ItemModal");
     setSelectedCard(card);
   };
 
@@ -161,7 +161,7 @@ function App() {
           handleAddItemSubmit={handleAddItemSubmit}
         />
         <ItemModal
-          activeModal={activeModal}
+          isOpen={activeModal === 'ItemModal'}
           card={selectedCard}
           closeActiveModal={closeActiveModal}
           onDelete={handleItemDelete}
