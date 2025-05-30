@@ -1,4 +1,5 @@
 import "./App.css";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
@@ -7,10 +8,13 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal";
 import DeleteModal from "../DeleteModal/DeleteModal.jsx";
 import Footer from "../Footer/Footer.jsx";
-import { useEffect, useState } from "react";
-import { coordinates, APIkey, defaultClothingItems } from "../../utils/constants.js";
-import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit.jsx";
+import {
+  coordinates,
+  APIkey,
+  defaultClothingItems,
+} from "../../utils/constants.js";
+import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
 import {
   fetchClothingItems,
   postNewItem,
@@ -150,7 +154,9 @@ function App() {
             />
             <Route
               path="/profile"
-              element={<Profile onCardClick={onCardClick} onAddClick={onAddClick}/>}
+              element={
+                <Profile onCardClick={onCardClick} onAddClick={onAddClick} />
+              }
             />
           </Routes>
           <Footer />
@@ -161,7 +167,7 @@ function App() {
           handleAddItemSubmit={handleAddItemSubmit}
         />
         <ItemModal
-          isOpen={activeModal === 'ItemModal'}
+          isOpen={activeModal === "ItemModal"}
           card={selectedCard}
           closeActiveModal={closeActiveModal}
           onDelete={handleItemDelete}
