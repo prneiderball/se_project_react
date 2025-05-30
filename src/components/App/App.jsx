@@ -162,7 +162,7 @@ function App() {
           <Footer />
         </div>
         <AddItemModal
-          isOpen={!!activeModal}
+          isOpen={activeModal === "add-garment"}
           closeActiveModal={closeActiveModal}
           handleAddItemSubmit={handleAddItemSubmit}
         />
