@@ -1,31 +1,37 @@
 import "./DeleteModal.css";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const DeleteModal = ({ isOpen, onConfirm, onCancel }) => {
-  if (!isOpen) return null;
+export default function DeleteModal({ isOpen, onConfirm, onCancel }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onConfirm();
+  };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <h2 className="modal__title">
-          Are you sure you want to delete this item? This action is irreversible.
-        </h2>
-        <div className="modal__actions">
-          <button
-            className="modal__button modal__button--confirm"
-            onClick={onConfirm}
-          >
-            Yes, delete item
-          </button>
-          <button
-            className="modal__button modal__button--cancel"
-            onClick={onCancel}
-          >
-            Cancel
-          </button>
-        </div>
+    <ModalWithForm
+      isOpen={isOpen}
+      closeActiveModal={onCancel}
+      onSubmit={handleSubmit}
+    >
+      <p className="modal__text">
+        Are you sure you want to delete this item?  
+        This action is irreversible.
+      </p>
+      <div className="modal__buttons">
+        <button
+          type="submit"
+          className="modal__button-confirm"
+        >
+          Yes, delete item
+        </button>
+        <button
+          type="button"
+          className="modal__button-cancel"
+          onClick={onCancel}
+        >
+          Cancel
+        </button>
       </div>
-    </div>
+    </ModalWithForm>
   );
-};
-
-export default DeleteModal;
+}
