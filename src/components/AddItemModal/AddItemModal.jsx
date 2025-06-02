@@ -41,6 +41,7 @@ export default function AddItemModal({
           placeholder="Name"
           onChange={handleNameChange}
           value={name}
+          required
         />
       </label>
 
@@ -53,6 +54,7 @@ export default function AddItemModal({
           placeholder="Image Url"
           onChange={handleImageUrlChange}
           value={imageUrl}
+          required
         />
       </label>
 
@@ -70,6 +72,7 @@ export default function AddItemModal({
             value="hot"
             onChange={handleTemperatureChange}
             checked={temperature === "hot"}
+            required
           />
           <span>Hot</span>
         </label>
@@ -83,6 +86,7 @@ export default function AddItemModal({
             value="warm"
             onChange={handleTemperatureChange}
             checked={temperature === "warm"}
+            required
           />
           <span>Warm</span>
         </label>
@@ -96,6 +100,7 @@ export default function AddItemModal({
             value="cold"
             onChange={handleTemperatureChange}
             checked={temperature === "cold"}
+            required
           />
           <span>Cold</span>
         </label>
