@@ -19,6 +19,16 @@ export const weatherConditions = [
     condition: "thunderstorm",
     url: new URL("../assets/daytime/thunderstorm.svg", import.meta.url).href,
   },
+    {
+    day: true,
+    condition: "snow",
+    url: new URL("../assets/daytime/snow.svg", import.meta.url).href,
+  },
+    {
+    day: true,
+    condition: "fog",
+    url: new URL("../assets/daytime/fog.svg", import.meta.url).href,
+  },
   {
     day: false,
     condition: "clear",
@@ -39,6 +49,16 @@ export const weatherConditions = [
     condition: "thunderstorm",
     url: new URL("../assets/nighttime/thunderstorm.svg", import.meta.url).href,
   },
+    {
+    day: false,
+    condition: "snow",
+    url: new URL("../assets/nighttime/snow.svg", import.meta.url).href,
+  },
+    {
+    day: false,
+    condition: "fog",
+    url: new URL("../assets/nighttime/fog.svg", import.meta.url).href,
+  }
 ];
 
 export const defaultClothingItems = [
