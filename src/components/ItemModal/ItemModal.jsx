@@ -2,12 +2,8 @@ import "./ItemModal.css";
 import ItemCloseIcon from "../../assets/closewhite.svg";
 
 function ItemModal({ isOpen, closeActiveModal, card, onConfirmDeleteRequest }) {
-  if (!isOpen || !card) {
-    return null;
-  }
-
   return (
-    <div className="modal modal--visible">
+    <div className={`modal ${isOpen && "modal--visible"}`}>
       <div className="modal__content modal__content_type_image">
         <button
           onClick={closeActiveModal}
