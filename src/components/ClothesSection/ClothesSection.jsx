@@ -1,5 +1,4 @@
 import "./ClothesSection.css";
-import { defaultClothingItems } from "../../utils/constants.js";
 import ItemCard from "../ItemCard/ItemCard.jsx";
 
 function ClothesSection({ onCardClick, onAdd, clothingItems }) {
