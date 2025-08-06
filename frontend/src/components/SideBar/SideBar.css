@@ -1,0 +1,18 @@
+.sidebar {
+  display: flex;
+  flex-direction: row;
+  width: 289px;
+}
+
+.sidebar__username {
+    font-weight: 700;
+    font-size: 20px;
+    margin-left: 16px;
+    width: 157px;
+    height: 25px;
+}
+
+.sidebar img {
+    width: 56px;
+    height: 56px;
+}

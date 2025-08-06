@@ -1,0 +1,23 @@
+.footer {
+  display: flex;
+  height: 40px;
+  max-width: 100%;
+  align-items: center;
+  margin: 42px 0 28px;
+  font-size: 16px;
+}
+
+.footer__name,
+.footer__year {
+  font-size: 16px;
+  font-weight: 500;
+  max-height: 20px;
+}
+
+.footer__name {
+  margin-right: auto;
+}
+
+.footer__year {
+  margin-right: 42px;
+}
