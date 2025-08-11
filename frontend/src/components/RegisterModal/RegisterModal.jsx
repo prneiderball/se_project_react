@@ -2,7 +2,7 @@ import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState } from "react";
 
-export default function RegisterModal({ isOpen, closeActiveModal, handleSignUp }) {
+export default function RegisterModal({ isOpen, closeActiveModal, handleRegister }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -15,7 +15,7 @@ export default function RegisterModal({ isOpen, closeActiveModal, handleSignUp }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleSignUp({ email, password, name, avatarUrl });
+    handleRegister({ email, password, name, avatar: avatarUrl });
     setEmail("");
     setPassword("");
     setName("");

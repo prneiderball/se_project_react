@@ -32,14 +32,13 @@ function App() {
 
   // Fetch weather data on mount
   useEffect(() => {
-  getWeatherData()
-    .then((data) => {
-      const filteredData = parseWeatherData(data);
-      setWeatherData(filteredData);
-    })
-    .catch((err) => console.error("Weather fetch error:", err));
-}, []);
-
+    getWeatherData()
+      .then((data) => {
+        const filteredData = parseWeatherData(data);
+        setWeatherData(filteredData);
+      })
+      .catch((err) => console.error("Weather fetch error:", err));
+  }, []);
 
   // Fetch clothing items on mount
   useEffect(() => {
@@ -117,6 +116,27 @@ function App() {
                 />
               }
             />
+
+            <Route
+              path="/login"
+              element={
+                <LoginModal
+                  closeActiveModal={() => navigate("/")}
+                  handleLogin={handleLogin}
+                />
+              }
+            />
+
+            <Route
+              path="/register"
+              element={
+                <RegisterModal
+                  closeActiveModal={() => navigate("/")}
+                  handleRegister={handleRegister}
+                />
+              }
+            />
+
             <Route
               path="/profile"
               element={
@@ -143,18 +163,6 @@ function App() {
             <ItemModal
               selectedCard={selectedCard}
               closeActiveModal={() => setActiveModal("")}
-            />
-          )}
-          {activeModal === "login" && (
-            <LoginModal
-              closeActiveModal={() => setActiveModal("")}
-              handleLogin={handleLogin}
-            />
-          )}
-          {activeModal === "register" && (
-            <RegisterModal
-              closeActiveModal={() => setActiveModal("")}
-              handleRegister={handleRegister}
             />
           )}
         </div>
