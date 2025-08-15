@@ -57,4 +57,29 @@ export const updateUserProfile = (name, avatar) => {
   }).then(handleResponse);
 };
 
+export function addCardLike(itemId, token) {
+  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
+export function removeCardLike(itemId, token) {
+  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
+
+
 export { handleResponse, fetchClothingItems, postNewItem, deleteItem };

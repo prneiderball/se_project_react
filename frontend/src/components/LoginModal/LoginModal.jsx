@@ -2,7 +2,12 @@ import "./LoginModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState } from "react";
 
-export default function LoginModal({ isOpen, closeActiveModal, handleLogin, openSignUpModal }) {
+export default function LoginModal({
+  isOpen = false,
+  closeActiveModal,
+  handleLogin,
+  openSignUpModal
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,6 +20,8 @@ export default function LoginModal({ isOpen, closeActiveModal, handleLogin, open
     setEmail("");
     setPassword("");
   };
+
+  if (!isOpen) return null;
 
   return (
     <ModalWithForm

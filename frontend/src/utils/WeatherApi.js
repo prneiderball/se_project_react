@@ -15,13 +15,10 @@ export function getWeatherData(coords = coordinates, APIkeyValue = APIkey) {
     .then(handleResponse)
     .catch((error) => {
       console.error("Error fetching weather data:", error);
-      return null; // Prevents crashes
+      return null; 
     });
 }
 
-/**
- * Parses raw weather API data into the format the app expects.
- */
 export function parseWeatherData(data) {
   if (!data) return null;
 

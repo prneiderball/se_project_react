@@ -59,7 +59,7 @@ export function Header({
           </Link>
         </>
       ) : (
-        <div className="header__auth-buttons">
+        <div className="header__auth-btns">
           <button onClick={onLoginClick} className="header__login-btn">
             Log In
           </button>
