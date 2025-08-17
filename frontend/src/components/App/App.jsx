@@ -16,8 +16,9 @@ import {
   fetchClothingItems,
   postNewItem,
   updateUserProfile,
+  deleteItem,
   addCardLike,
-  removeCardLike
+  removeCardLike,
 } from "../../utils/apiService.js";
 import { signup, signin, checkToken } from "../../utils/auth.js";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit.jsx";
@@ -91,7 +92,7 @@ function App() {
   const handleCardLike = ({ _id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     const action = !isLiked ? addCardLike : removeCardLike;
-    action(_id, token)
+    action(_id)
       .then((updatedCard) => {
         setClothingItems((cards) =>
           cards.map((item) => (item._id === _id ? updatedCard : item))
@@ -131,6 +132,19 @@ function App() {
         handleCloseModal();
       })
       .catch(console.error);
+  };
+
+  const handleDeleteItem = (itemId) => {
+    deleteItem(itemId)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== itemId)
+        );
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -189,6 +203,7 @@ function App() {
             isOpen={activeModal === "item"}
             selectedCard={selectedCard}
             closeActiveModal={handleCloseModal}
+            onConfirmDeleteRequest={handleDeleteItem}
           />
 
           <LoginModal
