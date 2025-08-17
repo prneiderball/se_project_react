@@ -20,6 +20,7 @@ function fetchClothingItems() {
 
 function postNewItem(item) {
   const token = localStorage.getItem("jwt");
+  console.log(item);
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {

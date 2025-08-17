@@ -7,6 +7,7 @@ const {
   likeItem,
   dislikeItem,
 } = require("../controllers/clothingItems");
+const auth = require("../middlewares/auth");
 const { BAD_REQUEST } = require("../utils/errors");
 
 const handleValidationErrors = (req, res, next) => {
@@ -19,6 +20,7 @@ const handleValidationErrors = (req, res, next) => {
 
 router.post(
   "/",
+  auth,
   [
     body("name")
       .isLength({ min: 2, max: 30 })
@@ -36,6 +38,7 @@ router.get("/", getItems);
 
 router.put(
   "/:itemId/likes",
+  auth,
   [
     param("itemId").isMongoId().withMessage("Invalid item ID"),
     handleValidationErrors,
@@ -45,6 +48,7 @@ router.put(
 
 router.delete(
   "/:itemId/likes",
+  auth,
   [
     param("itemId").isMongoId().withMessage("Invalid item ID"),
     handleValidationErrors,
@@ -54,6 +58,7 @@ router.delete(
 
 router.delete(
   "/:itemId",
+  auth,
   [
     param("itemId").isMongoId().withMessage("Invalid item ID"),
     handleValidationErrors,

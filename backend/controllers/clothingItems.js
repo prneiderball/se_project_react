@@ -9,17 +9,21 @@ const {
 
 const createItem = async (req, res) => {
   try {
+    console.log("BODY:", req.body);
+    console.log("USER:", req.user);
+
     const { name, weather, imageUrl } = req.body;
 
     const newItem = await ClothingItem.create({
       name,
       weather,
       imageUrl,
-      owner: req.user._id,
+      owner: req.user?._id,
     });
 
     return res.status(201).json(newItem);
   } catch (err) {
+    console.error("CREATE ITEM ERROR:", err);
     if (err.name === "ValidationError") {
       return res.status(BAD_REQUEST).json({ message: "Invalid data" });
     }
@@ -28,6 +32,7 @@ const createItem = async (req, res) => {
       .json({ message: "An error has occurred on the server" });
   }
 };
+
 
 const getItems = async (req, res) => {
   try {
