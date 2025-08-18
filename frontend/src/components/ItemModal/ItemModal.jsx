@@ -1,12 +1,12 @@
 import { useContext } from "react";
+import "./ItemModal.css";
 import CurrentUserContext from "../../context/CurrentUserContext";
-import  ItemCloseIcon from "../../assets/closewhite.svg";
-
+import ItemCloseIcon from "../../assets/closewhite.svg";
 
 function ItemModal({ isOpen, closeActiveModal, selectedCard, onConfirmDeleteRequest }) {
   const card = selectedCard;
   const currentUser = useContext(CurrentUserContext);
-  const isOwn = card?.owner === currentUser?._id;
+  const isOwn = card?._id && card?.owner === currentUser?._id;
 
   if (!isOpen) return null;
 
@@ -21,15 +21,16 @@ function ItemModal({ isOpen, closeActiveModal, selectedCard, onConfirmDeleteRequ
         >
           <img src={ItemCloseIcon} alt="Close" />
         </button>
-        {card ? (
+
+        {card && card._id ? (
           <>
             <img
-              src={card.link}
+              src={card.imageUrl}
               alt={card.name || "Item"}
               className="modal__image"
             />
             <div className="modal__footer">
-              {isOwn && (
+              {isOwn && onConfirmDeleteRequest && (
                 <button
                   onClick={() => onConfirmDeleteRequest(card._id)}
                   type="button"

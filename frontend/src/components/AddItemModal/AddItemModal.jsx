@@ -13,7 +13,7 @@ export default function AddItemModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAddItemSubmit({ name, imageUrl, weather }); // send correct key
+    handleAddItemSubmit({ name, imageUrl, weather });
     setName("");
     setImageUrl("");
     setWeather("");

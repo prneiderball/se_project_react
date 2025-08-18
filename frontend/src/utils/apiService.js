@@ -15,7 +15,15 @@ function handleError(error) {
 }
 
 function fetchClothingItems() {
-  return fetch(`${baseUrl}/items`).then(handleResponse).catch(handleError);
+  const token = localStorage.getItem("jwt");
+  return fetch(`${baseUrl}/items`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token ? `Bearer ${token}` : undefined,
+    },
+  })
+    .then(handleResponse)
+    .catch(handleError);
 }
 
 function postNewItem(item) {
@@ -58,7 +66,8 @@ export const updateUserProfile = (name, avatar) => {
   }).then(handleResponse);
 };
 
-export function addCardLike(itemId, token) {
+export function addCardLike(itemId) {
+  const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/items/${itemId}/likes`, {
     method: "PUT",
     headers: {
@@ -70,7 +79,8 @@ export function addCardLike(itemId, token) {
     .catch(handleError);
 }
 
-export function removeCardLike(itemId, token) {
+export function removeCardLike(itemId) {
+  const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/items/${itemId}/likes`, {
     method: "DELETE",
     headers: {
@@ -81,6 +91,5 @@ export function removeCardLike(itemId, token) {
     .then(handleResponse)
     .catch(handleError);
 }
-
 
 export { handleResponse, fetchClothingItems, postNewItem, deleteItem };
