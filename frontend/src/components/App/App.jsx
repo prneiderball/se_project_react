@@ -184,7 +184,7 @@ function App() {
                     onCardClick={handleOpenItemModal}
                     onEditProfile={handleOpenEditProfileModal}
                     onSignOut={handleSignOut}
-                    onCardLike={onCardLike}
+                    onCardLike={handleCardLike}
                   />
                 </ProtectedRoute>
               }

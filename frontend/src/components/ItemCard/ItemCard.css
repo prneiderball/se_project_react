@@ -1,5 +1,6 @@
 .card {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 323px;
   position: relative;
@@ -9,9 +10,20 @@
   margin-bottom: auto;
 }
 
-.card__title {
+.card__header {
   position: absolute;
-  top: 25px;
+  top: 8px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  padding: 0 8px;
+}
+
+/* Title styling */
+.card__title {
   margin: 0;
   background-color: #fff;
   padding: 2px 12px;
@@ -28,9 +40,6 @@
 }
 
 .card__like-button {
-  position: absolute;
-  top: 8px;
-  right: 8px;
   background: none;
   border: none;
   cursor: pointer;
@@ -38,7 +47,7 @@
 }
 
 .card__like-icon {
-  width: 20px;
-  height: 20px;
-  pointer-events: none; 
+  width: 18px;
+  height: 15px;
+  pointer-events: none;
 }
