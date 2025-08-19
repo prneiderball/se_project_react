@@ -10,7 +10,7 @@ function Profile({
   clothingItems,
   onEditProfile,
   onSignOut,
-  onCardLike
+  onCardLike,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -21,10 +21,7 @@ function Profile({
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <SideBar
-          onEditProfile={onEditProfile}
-          onSignOut={onSignOut}
-        />
+        <SideBar onEditProfile={onEditProfile} onSignOut={onSignOut} />
       </section>
       <section className="profile__clothes-section">
         <ClothesSection

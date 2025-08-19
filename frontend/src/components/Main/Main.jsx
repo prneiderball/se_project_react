@@ -10,6 +10,7 @@ function Main({
   clothingItems,
   handleItemDelete,
   handleConfirmDeleteRequest,
+  onCardLike,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
@@ -44,6 +45,7 @@ function Main({
                 key={item._id}
                 item={item}
                 onCardClick={() => onCardClick(item)}
+                onCardLike={onCardLike}
                 onDelete={handleItemDelete}
                 onConfirmDeleteRequest={handleConfirmDeleteRequest}
               />
