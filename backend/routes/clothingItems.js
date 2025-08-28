@@ -22,13 +22,9 @@ router.post(
   "/",
   auth,
   [
-    body("name")
-      .isLength({ min: 2, max: 30 })
-      .withMessage("Name must be 2–30 characters long"),
-    body("weather")
-      .isIn(["hot", "warm", "cold"])
-      .withMessage("Weather must be one of: hot, warm, cold"),
-    body("imageUrl").isURL().withMessage("imageUrl must be a valid URL"),
+    body("name").isLength({ min: 2, max: 30 }),
+    body("weather").isIn(["hot", "warm", "cold"]),
+    body("imageUrl").isURL(),
     handleValidationErrors,
   ],
   createItem
@@ -39,30 +35,21 @@ router.get("/", getItems);
 router.put(
   "/:itemId/likes",
   auth,
-  [
-    param("itemId").isMongoId().withMessage("Invalid item ID"),
-    handleValidationErrors,
-  ],
+  [param("itemId").isMongoId(), handleValidationErrors],
   likeItem
 );
 
 router.delete(
   "/:itemId/likes",
   auth,
-  [
-    param("itemId").isMongoId().withMessage("Invalid item ID"),
-    handleValidationErrors,
-  ],
+  [param("itemId").isMongoId(), handleValidationErrors],
   dislikeItem
 );
 
 router.delete(
   "/:itemId",
   auth,
-  [
-    param("itemId").isMongoId().withMessage("Invalid item ID"),
-    handleValidationErrors,
-  ],
+  [param("itemId").isMongoId(), handleValidationErrors],
   deleteItem
 );
 

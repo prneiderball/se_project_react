@@ -25,7 +25,6 @@ const createItem = async (req, res) => {
 
     return res.status(201).json(newItem);
   } catch (err) {
-    console.error("CREATE ITEM ERROR:", err);
     if (err.name === "ValidationError") {
       return res.status(BAD_REQUEST).json({ message: "Invalid data" });
     }
@@ -37,11 +36,7 @@ const createItem = async (req, res) => {
 
 const getItems = async (req, res) => {
   try {
-    if (!req.user) {
-      return res.status(UNAUTHORIZED).json({ message: "Unauthorized" });
-    }
-
-    const items = await ClothingItem.find({ owner: req.user._id });
+    const items = await ClothingItem.find({});
     return res.status(200).json(items);
   } catch (err) {
     return res
