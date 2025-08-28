@@ -8,7 +8,7 @@ const {
   dislikeItem,
 } = require("../controllers/clothingItems");
 const auth = require("../middlewares/auth");
-const { BAD_REQUEST } = require("../utils/errors");
+const { BAD_REQUEST } = require("../utils/statusCodes");
 
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);

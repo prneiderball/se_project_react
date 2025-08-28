@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { BAD_REQUEST, NOT_FOUND, SERVER_ERROR } = require("./errors");
+const { BAD_REQUEST, NOT_FOUND, SERVER_ERROR } = require("./statusCodes");
 
 const handleError = (err, res) => {
   if (err instanceof mongoose.Error.ValidationError) {

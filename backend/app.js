@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 const routes = require("./routes/index");
+const errorHandler = require("./middlewares/error-handler");
 
 const app = express();
 const { PORT = 3001 } = process.env;
@@ -21,10 +22,7 @@ app.use(express.json());
 
 app.use("/", routes);
 
-app.use((err, req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.status(err.status || 500).send({ message: err.message });
-});
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

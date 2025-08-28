@@ -2,25 +2,20 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-const handleError = require("../utils/handleError");
 const {
-  BAD_REQUEST,
-  CONFLICT,
-  UNAUTHORIZED,
-  NOT_FOUND,
-  SERVER_ERROR,
+  BadRequestError,
+  UnauthorizedError,
+  ConflictError,
+  NotFoundError,
 } = require("../utils/errors");
 const { JWT_SECRET } = require("../utils/config");
 
-// Create a new user
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
   try {
     const { name, avatar, email, password } = req.body;
 
     if (!name || !avatar || !email || !password) {
-      return res
-        .status(BAD_REQUEST)
-        .send({ message: "All fields are required" });
+      return next(new BadRequestError("All fields are required"));
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -35,89 +30,72 @@ const createUser = async (req, res) => {
     const userResponse = user.toObject();
     delete userResponse.password;
 
-    return res.status(201).send(userResponse);
+    return res.status(201).json(userResponse);
   } catch (err) {
     if (err.code === 11000 && err.keyPattern?.email) {
-      return res.status(CONFLICT).send({ message: "Email already in use" });
+      return next(new ConflictError("Email already in use"));
     }
-
-    return handleError(err, res);
+    return next(err);
   }
 };
 
-// Get current user
-const getCurrentUser = async (req, res) => {
+const getCurrentUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).orFail(
       new Error("User not found")
     );
-    return res.status(200).send(user);
+    return res.status(200).json(user);
   } catch (err) {
     if (err instanceof mongoose.Error.CastError) {
-      return res.status(BAD_REQUEST).send({ message: "Invalid user ID" });
+      return next(new BadRequestError("Invalid user ID"));
     }
     if (err.message === "User not found") {
-      return res.status(NOT_FOUND).send({ message: "User not found" });
+      return next(new NotFoundError("User not found"));
     }
-    return res
-      .status(SERVER_ERROR)
-      .send({ message: "An error has occurred on the server" });
+    return next(err);
   }
 };
 
-const login = (req, res) => {
-  const { email, password } = req.body;
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res
-      .status(BAD_REQUEST)
-      .send({ message: "Email and password are required" });
+    if (!email || !password) {
+      return next(new BadRequestError("Email and password are required"));
+    }
+
+    const user = await User.findUserByCredentials(email, password);
+    const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: "7d" });
+
+    return res.json({ token });
+  } catch (err) {
+    if (err.message === "Incorrect email or password") {
+      return next(new UnauthorizedError("Incorrect email or password"));
+    }
+    return next(err);
   }
-
-  return User.findUserByCredentials(email, password)
-    .then((user) => {
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
-        expiresIn: "7d",
-      });
-      return res.send({ token });
-    })
-    .catch((err) => {
-      if (err.message === "Incorrect email or password") {
-        return res
-          .status(UNAUTHORIZED)
-          .send({ message: "Incorrect email or password" });
-      }
-      return res
-        .status(SERVER_ERROR)
-        .send({ message: "An error has occurred on the server" });
-    });
 };
 
-const updateUserProfile = async (req, res) => {
+const updateUserProfile = async (req, res, next) => {
   try {
     const { name, avatar } = req.body;
 
     if (!name && !avatar) {
-      return res
-        .status(BAD_REQUEST)
-        .send({ message: "At least one field (name or avatar) is required" });
+      return next(new BadRequestError("At least one field (name or avatar) is required"));
     }
 
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
       { ...(name && { name }), ...(avatar && { avatar }) },
-      {
-        new: true,
-        runValidators: true,
-      }
+      { new: true, runValidators: true }
     ).orFail(new Error("User not found"));
 
-    return res.send(updatedUser);
+    return res.json(updatedUser);
   } catch (err) {
     if (err.message === "User not found") {
-      return res.status(NOT_FOUND).send({ message: "User not found" });
+      return next(new NotFoundError("User not found"));
     }
-    return handleError(err, res);
+    return next(err);
   }
 };
 
