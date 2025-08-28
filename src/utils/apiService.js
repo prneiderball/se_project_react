@@ -2,9 +2,11 @@ const baseUrl = "http://localhost:3001";
 
 function handleResponse(res) {
   if (!res.ok) {
-    throw new Error(
-      `Network response was not ok: ${res.status} ${res.statusText}`
-    );
+    if (res.status === 401) {
+      console.warn("Unauthorized! Redirecting to login...");
+      localStorage.removeItem("jwt");
+    }
+    throw new Error(`Network response was not ok: ${res.status} ${res.statusText}`);
   }
   return res.json();
 }
@@ -14,9 +16,8 @@ function handleError(error) {
   throw error;
 }
 
-// Helper to get headers with optional token
 function getHeaders() {
-  const token = localStorage.getItem("jwt");
+  const token = localStorage.getItem("jwt"); 
   const headers = { "Content-Type": "application/json" };
   if (token) headers.Authorization = `Bearer ${token}`;
   return headers;
@@ -73,6 +74,10 @@ export function removeCardLike(itemId) {
   })
     .then(handleResponse)
     .catch(handleError);
+}
+
+export function saveToken(token) {
+  localStorage.setItem("jwt", token);
 }
 
 export { handleResponse, fetchClothingItems, postNewItem, deleteItem };

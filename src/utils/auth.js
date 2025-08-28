@@ -1,5 +1,12 @@
 const BASE_URL = "http://localhost:3001";
 
+function handleResponse(res) {
+  if (!res.ok) {
+    return Promise.reject(`Error: ${res.status}`);
+  }
+  return res.json();
+}
+
 export const signup = ({ name, avatar, email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
@@ -25,15 +32,7 @@ export const checkToken = (token) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`, 
     },
   }).then(handleResponse);
 };
-
-
-function handleResponse(res) {
-  if (!res.ok) {
-    return Promise.reject(`Error: ${res.status}`);
-  }
-  return res.json();
-}

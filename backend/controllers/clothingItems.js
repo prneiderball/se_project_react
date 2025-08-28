@@ -8,7 +8,6 @@ const {
   UNAUTHORIZED,
 } = require("../utils/errors");
 
-// Create a new clothing item
 const createItem = async (req, res) => {
   try {
     if (!req.user) {
@@ -36,7 +35,6 @@ const createItem = async (req, res) => {
   }
 };
 
-// Get all items for the logged-in user
 const getItems = async (req, res) => {
   try {
     if (!req.user) {
@@ -52,7 +50,6 @@ const getItems = async (req, res) => {
   }
 };
 
-// Delete a clothing item
 const deleteItem = async (req, res) => {
   try {
     if (!req.user) {
@@ -86,7 +83,6 @@ const deleteItem = async (req, res) => {
   }
 };
 
-// Like a clothing item
 const likeItem = async (req, res) => {
   try {
     if (!req.user) {
@@ -113,7 +109,6 @@ const likeItem = async (req, res) => {
   }
 };
 
-// Dislike a clothing item
 const dislikeItem = async (req, res) => {
   try {
     if (!req.user) {
