@@ -30,13 +30,13 @@ export default function RegisterModal({ isOpen, closeActiveModal, handleRegister
       closeActiveModal={closeActiveModal}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="register-email" className="modal__label">
         Email*
         <input
           name="email"
           type="email"
           className="modal__input"
-          id="email"
+          id="register-email"
           placeholder="Email"
           onChange={handleEmailChange}
           value={email}
@@ -44,13 +44,13 @@ export default function RegisterModal({ isOpen, closeActiveModal, handleRegister
         />
       </label>
 
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="register-password" className="modal__label">
         Password*
         <input
           name="password"
           type="password"
           className="modal__input"
-          id="password"
+          id="register-password"
           placeholder="Password"
           onChange={handlePasswordChange}
           value={password}
@@ -58,13 +58,13 @@ export default function RegisterModal({ isOpen, closeActiveModal, handleRegister
         />
       </label>
 
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="register-name" className="modal__label">
         Name*
         <input
           name="name"
           type="text"
           className="modal__input"
-          id="name"
+          id="register-name"
           placeholder="Name"
           onChange={handleNameChange}
           value={name}
@@ -72,13 +72,13 @@ export default function RegisterModal({ isOpen, closeActiveModal, handleRegister
         />
       </label>
 
-      <label htmlFor="avatarUrl" className="modal__label">
+      <label htmlFor="register-avatar" className="modal__label">
         Avatar URL*
         <input
           name="avatarUrl"
           type="url"
           className="modal__input"
-          id="avatarUrl"
+          id="register-avatar"
           placeholder="Avatar URL"
           onChange={handleAvatarUrlChange}
           value={avatarUrl}

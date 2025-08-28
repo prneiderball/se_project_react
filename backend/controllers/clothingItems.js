@@ -5,12 +5,15 @@ const {
   NOT_FOUND,
   SERVER_ERROR,
   FORBIDDEN,
+  UNAUTHORIZED,
 } = require("../utils/errors");
 
+// Create a new clothing item
 const createItem = async (req, res) => {
   try {
-    console.log("BODY:", req.body);
-    console.log("USER:", req.user);
+    if (!req.user) {
+      return res.status(UNAUTHORIZED).json({ message: "Unauthorized" });
+    }
 
     const { name, weather, imageUrl } = req.body;
 
@@ -18,7 +21,7 @@ const createItem = async (req, res) => {
       name,
       weather,
       imageUrl,
-      owner: req.user?._id,
+      owner: req.user._id,
     });
 
     return res.status(201).json(newItem);
@@ -33,10 +36,14 @@ const createItem = async (req, res) => {
   }
 };
 
-
+// Get all items for the logged-in user
 const getItems = async (req, res) => {
   try {
-    const items = await ClothingItem.find({});
+    if (!req.user) {
+      return res.status(UNAUTHORIZED).json({ message: "Unauthorized" });
+    }
+
+    const items = await ClothingItem.find({ owner: req.user._id });
     return res.status(200).json(items);
   } catch (err) {
     return res
@@ -45,11 +52,18 @@ const getItems = async (req, res) => {
   }
 };
 
+// Delete a clothing item
 const deleteItem = async (req, res) => {
   try {
+    if (!req.user) {
+      return res.status(UNAUTHORIZED).json({ message: "Unauthorized" });
+    }
+
     const { itemId } = req.params;
 
-    const item = await ClothingItem.findById(itemId).orFail(new Error("Item not found"));
+    const item = await ClothingItem.findById(itemId).orFail(
+      new Error("Item not found")
+    );
 
     if (item.owner.toString() !== req.user._id.toString()) {
       return res
@@ -72,8 +86,13 @@ const deleteItem = async (req, res) => {
   }
 };
 
+// Like a clothing item
 const likeItem = async (req, res) => {
   try {
+    if (!req.user) {
+      return res.status(UNAUTHORIZED).json({ message: "Unauthorized" });
+    }
+
     const item = await ClothingItem.findByIdAndUpdate(
       req.params.itemId,
       { $addToSet: { likes: req.user._id } },
@@ -94,8 +113,13 @@ const likeItem = async (req, res) => {
   }
 };
 
+// Dislike a clothing item
 const dislikeItem = async (req, res) => {
   try {
+    if (!req.user) {
+      return res.status(UNAUTHORIZED).json({ message: "Unauthorized" });
+    }
+
     const item = await ClothingItem.findByIdAndUpdate(
       req.params.itemId,
       { $pull: { likes: req.user._id } },

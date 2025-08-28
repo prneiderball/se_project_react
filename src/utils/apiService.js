@@ -14,27 +14,26 @@ function handleError(error) {
   throw error;
 }
 
-function fetchClothingItems() {
+// Helper to get headers with optional token
+function getHeaders() {
   const token = localStorage.getItem("jwt");
+  const headers = { "Content-Type": "application/json" };
+  if (token) headers.Authorization = `Bearer ${token}`;
+  return headers;
+}
+
+function fetchClothingItems() {
   return fetch(`${baseUrl}/items`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token ? `Bearer ${token}` : undefined,
-    },
+    headers: getHeaders(),
   })
     .then(handleResponse)
     .catch(handleError);
 }
 
 function postNewItem(item) {
-  const token = localStorage.getItem("jwt");
-  console.log(item);
   return fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: getHeaders(),
     body: JSON.stringify(item),
   })
     .then(handleResponse)
@@ -42,51 +41,35 @@ function postNewItem(item) {
 }
 
 function deleteItem(itemId) {
-  const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: getHeaders(),
   })
     .then(handleResponse)
     .catch(handleError);
 }
 
 export const updateUserProfile = (name, avatar) => {
-  const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: getHeaders(),
     body: JSON.stringify({ name, avatar }),
   }).then(handleResponse);
 };
 
 export function addCardLike(itemId) {
-  const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/items/${itemId}/likes`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: getHeaders(),
   })
     .then(handleResponse)
     .catch(handleError);
 }
 
 export function removeCardLike(itemId) {
-  const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/items/${itemId}/likes`, {
     method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: getHeaders(),
   })
     .then(handleResponse)
     .catch(handleError);

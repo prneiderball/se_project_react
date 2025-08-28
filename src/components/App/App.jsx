@@ -35,6 +35,7 @@ function App() {
 
   const navigate = useNavigate();
 
+  // Weather fetch
   useEffect(() => {
     getWeatherData()
       .then((data) => setWeatherData(parseWeatherData(data)))
@@ -42,19 +43,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetchClothingItems()
-      .then((items) => setClothingItems(items))
-      .catch(console.error);
-  }, []);
-
-  useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (!token) return;
+
     checkToken(token)
       .then((userData) => {
         setCurrentUser(userData);
         setIsLoggedIn(true);
+        return fetchClothingItems();
       })
+      .then((items) => setClothingItems(items))
       .catch(() => {
         setIsLoggedIn(false);
         setCurrentUser(null);
@@ -76,29 +74,8 @@ function App() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setCurrentUser(null);
+    setClothingItems([]);
     navigate("/");
-  };
-
-  const handleToggleSwitchChange = () => {
-    setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
-  };
-
-  const handleAddItemSubmit = (item) => {
-    postNewItem(item)
-      .then((newItem) => setClothingItems((prev) => [newItem, ...prev]))
-      .catch(console.error);
-  };
-
-  const handleCardLike = ({ _id, isLiked }) => {
-    const token = localStorage.getItem("jwt");
-    const action = !isLiked ? addCardLike : removeCardLike;
-    action(_id)
-      .then((updatedCard) => {
-        setClothingItems((cards) =>
-          cards.map((item) => (item._id === _id ? updatedCard : item))
-        );
-      })
-      .catch(console.error);
   };
 
   const handleRegister = ({ name, avatar, email, password }) => {
@@ -119,8 +96,33 @@ function App() {
       .then((userData) => {
         setCurrentUser(userData);
         setIsLoggedIn(true);
+        return fetchClothingItems();
+      })
+      .then((items) => {
+        setClothingItems(items);
         handleCloseModal();
         navigate("/profile");
+      })
+      .catch(console.error);
+  };
+
+  const handleToggleSwitchChange = () => {
+    setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
+  };
+
+  const handleAddItemSubmit = (item) => {
+    postNewItem(item)
+      .then((newItem) => setClothingItems((prev) => [newItem, ...prev]))
+      .catch(console.error);
+  };
+
+  const handleCardLike = ({ _id, isLiked }) => {
+    const action = !isLiked ? addCardLike : removeCardLike;
+    action(_id)
+      .then((updatedCard) => {
+        setClothingItems((cards) =>
+          cards.map((item) => (item._id === _id ? updatedCard : item))
+        );
       })
       .catch(console.error);
   };
@@ -142,9 +144,7 @@ function App() {
         );
         handleCloseModal();
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(console.error);
   };
 
   return (

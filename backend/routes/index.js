@@ -9,7 +9,7 @@ const itemRouter = require("./clothingItems");
 
 const { BAD_REQUEST, NOT_FOUND } = require("../utils/errors");
 
-// Public route
+// Public route: signup
 router.post(
   "/signup",
   [
@@ -31,21 +31,19 @@ router.post(
   }
 );
 
-// Public route
+// Public route: signin
 router.post("/signin", login);
 
-// Public route
+// Public item routes
 router.use("/items", itemRouter);
 
-// Protected route
+// Protected routes
 router.use(auth);
-
-// Protected route
 router.use("/users", userRouter);
 
-
+// 404 handler
 router.use((req, res) => {
-  res.status(NOT_FOUND).send({ message: "This page doesn't exist" });
+  res.status(NOT_FOUND).json({ message: "This page doesn't exist" });
 });
 
 module.exports = router;
