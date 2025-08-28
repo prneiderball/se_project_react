@@ -1,13 +1,11 @@
 const { Joi, celebrate } = require("celebrate");
 const validator = require("validator");
 
-// Helper function to validate URLs
 const validateURL = (value, helpers) => {
   if (validator.isURL(value)) return value;
   return helpers.error("string.uri");
 };
 
-// Clothing item body validation
 const validateCardBody = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30).messages({
@@ -26,7 +24,6 @@ const validateCardBody = celebrate({
   }),
 });
 
-// User creation validation
 const validateUserBody = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30).messages({
@@ -46,7 +43,6 @@ const validateUserBody = celebrate({
   }),
 });
 
-// Login validation
 const validateLogin = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email().messages({
@@ -59,7 +55,6 @@ const validateLogin = celebrate({
   }),
 });
 
-// Item ID validation
 const validateItemId = celebrate({
   params: Joi.object().keys({
     itemId: Joi.string().hex().length(24).required().messages({
@@ -70,7 +65,6 @@ const validateItemId = celebrate({
   }),
 });
 
-// User ID validation
 const validateUserId = celebrate({
   params: Joi.object().keys({
     userId: Joi.string().hex().length(24).required().messages({
