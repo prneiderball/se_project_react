@@ -28,24 +28,27 @@ function EditProfileModal({ isOpen, closeActiveModal, handleUpdateUser }) {
       onSubmit={handleSubmit}
       buttonText="Save"
     >
-      <label className="modal__label">
+      <label className="modal__label" htmlFor="profile-name">
         Name
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
       </label>
-      <label className="modal__label">
+      <input
+        id="profile-name"
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
+
+      <label className="modal__label" htmlFor="profile-avatar">
         Avatar URL
-        <input
-          type="url"
-          value={avatar}
-          onChange={(e) => setAvatar(e.target.value)}
-          required
-        />
       </label>
+      <input
+        id="profile-avatar"
+        type="url"
+        value={avatar}
+        onChange={(e) => setAvatar(e.target.value)}
+        required
+      />
     </ModalWithForm>
   );
 }

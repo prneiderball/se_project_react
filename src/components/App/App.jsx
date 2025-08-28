@@ -11,7 +11,8 @@ import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 import Profile from "../Profile/Profile.jsx";
 import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
-import { getWeatherData, parseWeatherData } from "../../utils/weatherApi.js";
+
+import { getWeatherData, parseWeatherData } from "../../utils/WeatherApi.js";
 import {
   fetchClothingItems,
   postNewItem,
@@ -21,21 +22,21 @@ import {
   removeCardLike,
 } from "../../utils/apiService.js";
 import { signup, signin, checkToken } from "../../utils/auth.js";
-import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit.jsx";
-import CurrentUserContext from "../../context/CurrentUserContext.jsx";
+import { defaultClothingItems } from "../../utils/constants.js";
+import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit.js";
+import CurrentUserContext from "../../context/CurrentUserContext.js";
 
 function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [weatherData, setWeatherData] = useState({});
-  const [clothingItems, setClothingItems] = useState([]);
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
-  // Weather fetch
   useEffect(() => {
     getWeatherData()
       .then((data) => setWeatherData(parseWeatherData(data)))
@@ -43,6 +44,10 @@ function App() {
   }, []);
 
   useEffect(() => {
+    fetchClothingItems()
+      .then((items) => setClothingItems(items))
+      .catch(console.error);
+
     const token = localStorage.getItem("jwt");
     if (!token) return;
 
@@ -50,9 +55,7 @@ function App() {
       .then((userData) => {
         setCurrentUser(userData);
         setIsLoggedIn(true);
-        return fetchClothingItems();
       })
-      .then((items) => setClothingItems(items))
       .catch(() => {
         setIsLoggedIn(false);
         setCurrentUser(null);
@@ -74,7 +77,7 @@ function App() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setCurrentUser(null);
-    setClothingItems([]);
+    setClothingItems(defaultClothingItems);
     navigate("/");
   };
 
@@ -160,7 +163,6 @@ function App() {
             onRegisterClick={handleOpenRegisterModal}
             weatherData={weatherData}
           />
-
           <Routes>
             <Route
               path="/"
@@ -190,35 +192,29 @@ function App() {
               }
             />
           </Routes>
-
           <Footer />
-
           <AddItemModal
             isOpen={activeModal === "add"}
             closeActiveModal={handleCloseModal}
             handleAddItemSubmit={handleAddItemSubmit}
           />
-
           <ItemModal
             isOpen={activeModal === "item"}
             selectedCard={selectedCard}
             closeActiveModal={handleCloseModal}
             onConfirmDeleteRequest={handleDeleteItem}
           />
-
           <LoginModal
             isOpen={activeModal === "login"}
             closeActiveModal={handleCloseModal}
             handleLogin={handleLogin}
             openSignUpModal={handleOpenRegisterModal}
           />
-
           <RegisterModal
             isOpen={activeModal === "register"}
             closeActiveModal={handleCloseModal}
             handleRegister={handleRegister}
           />
-
           <EditProfileModal
             isOpen={activeModal === "editProfile"}
             closeActiveModal={handleCloseModal}
