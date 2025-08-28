@@ -6,7 +6,9 @@ function handleResponse(res) {
       console.warn("Unauthorized! Redirecting to login...");
       localStorage.removeItem("jwt");
     }
-    throw new Error(`Network response was not ok: ${res.status} ${res.statusText}`);
+    throw new Error(
+      `Network response was not ok: ${res.status} ${res.statusText}`
+    );
   }
   return res.json();
 }
@@ -17,7 +19,7 @@ function handleError(error) {
 }
 
 function getHeaders() {
-  const token = localStorage.getItem("jwt"); 
+  const token = localStorage.getItem("jwt");
   const headers = { "Content-Type": "application/json" };
   if (token) headers.Authorization = `Bearer ${token}`;
   return headers;

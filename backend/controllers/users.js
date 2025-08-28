@@ -65,7 +65,6 @@ const getCurrentUser = async (req, res) => {
   }
 };
 
-// User login
 const login = (req, res) => {
   const { email, password } = req.body;
 
@@ -94,7 +93,6 @@ const login = (req, res) => {
     });
 };
 
-// Update current user's profile (name and avatar only)
 const updateUserProfile = async (req, res) => {
   try {
     const { name, avatar } = req.body;
