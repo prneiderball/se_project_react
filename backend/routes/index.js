@@ -16,17 +16,23 @@ router.post(
   ],
   (req, res, next) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) return res.status(BAD_REQUEST).json({ message: "Invalid input data" });
+    if (!errors.isEmpty()) {
+      return res.status(BAD_REQUEST).json({ message: "Invalid input data" });
+    }
     return createUser(req, res, next);
   }
 );
 
 router.post("/signin", login);
 
-router.use(auth);
 router.use("/items", itemRouter);
+
+router.use(auth);
+
 router.use("/users", userRouter);
 
-router.use((req, res) => res.status(NOT_FOUND).json({ message: "This page doesn't exist" }));
+router.use((req, res) =>
+  res.status(NOT_FOUND).json({ message: "This page doesn't exist" })
+);
 
 module.exports = router;

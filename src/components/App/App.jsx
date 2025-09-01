@@ -23,8 +23,8 @@ import {
 } from "../../utils/apiService.js";
 import { signup, signin, checkToken } from "../../utils/auth.js";
 import { defaultClothingItems } from "../../utils/constants.js";
-import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit.js";
-import CurrentUserContext from "../../context/CurrentUserContext.js";
+import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit.jsx";
+import CurrentUserContext from "../../context/CurrentUserContext.jsx";
 
 function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
