@@ -15,7 +15,6 @@ module.exports = (req, res, next) => {
     req.user = payload;
     return next();
   } catch (err) {
-    console.error("JWT Verify Error:", err.message);
     return res.status(401).send({ message: "Authorization required" });
   }
 };
