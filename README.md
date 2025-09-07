@@ -69,7 +69,7 @@ npm install
 # Start the development server
 npm start
 
-## Running the backend
-The backend for this project is stored in this repo’s `backend` directory. To run it:
-cd backend
+## Running the server
+The server for this project is stored in this repo’s `server` directory. To run it:
+cd server
 npm install && npm run dev
