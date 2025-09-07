@@ -7,6 +7,7 @@ export default function RegisterModal({
   isOpen,
   closeActiveModal,
   handleRegister,
+  openLoginModal,
 }) {
   const { values, handleChange, setValues } = useForm({
     email: "",
@@ -15,7 +16,6 @@ export default function RegisterModal({
     avatarUrl: "",
   });
 
-  // Reset form only when the modal opens
   useEffect(() => {
     if (isOpen) {
       setValues({ email: "", password: "", name: "", avatarUrl: "" });
@@ -32,10 +32,11 @@ export default function RegisterModal({
     });
   };
 
+  if (!isOpen) return null;
+
   return (
     <ModalWithForm
       title="Sign Up"
-      buttonText="Sign Up"
       isOpen={isOpen}
       closeActiveModal={closeActiveModal}
       onSubmit={handleSubmit}
@@ -95,6 +96,21 @@ export default function RegisterModal({
           required
         />
       </label>
+
+      <div className="modal__actions">
+        <button
+          type="submit"
+          className="modal__submit"
+          disabled={
+            !values.email || !values.password || !values.name || !values.avatarUrl
+          }
+        >
+          Sign Up
+        </button>
+        <span className="modal__alt" onClick={openLoginModal}>
+          or Log In
+        </span>
+      </div>
     </ModalWithForm>
   );
 }

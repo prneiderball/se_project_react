@@ -8,12 +8,18 @@ function ItemModal({
   closeActiveModal,
   selectedCard,
   onConfirmDeleteRequest,
+  isLoading = false,
 }) {
-  const card = selectedCard;
   const currentUser = useContext(CurrentUserContext);
-  const isOwn = card?._id && card?.owner === currentUser?._id;
+  const isOwn = selectedCard?._id && selectedCard?.owner === currentUser?._id;
 
   if (!isOpen) return null;
+
+  const handleDelete = () => {
+    if (onConfirmDeleteRequest && selectedCard._id) {
+      onConfirmDeleteRequest(selectedCard._id);
+    }
+  };
 
   return (
     <div className="modal modal--visible">
@@ -27,26 +33,29 @@ function ItemModal({
           <img src={ItemCloseIcon} alt="Close" />
         </button>
 
-        {card && card._id ? (
+        {selectedCard && selectedCard._id ? (
           <>
             <img
-              src={card.imageUrl}
-              alt={card.name || "Item"}
+              src={selectedCard.imageUrl}
+              alt={selectedCard.name || "Item"}
               className="modal__image"
             />
             <div className="modal__footer">
               {isOwn && onConfirmDeleteRequest && (
                 <button
-                  onClick={() => onConfirmDeleteRequest(card._id)}
+                  onClick={handleDelete}
                   type="button"
                   className="modal__delete"
                   aria-label="Delete item"
+                  disabled={isLoading}
                 >
-                  Delete item
+                  {isLoading ? "Deleting..." : "Delete item"}
                 </button>
               )}
-              <h2 className="modal__caption">{card.name || "No name"}</h2>
-              <p className="modal__weather">Weather: {card.weather || "N/A"}</p>
+              <h2 className="modal__caption">{selectedCard.name || "No name"}</h2>
+              <p className="modal__weather">
+                Weather: {selectedCard.weather || "N/A"}
+              </p>
             </div>
           </>
         ) : (

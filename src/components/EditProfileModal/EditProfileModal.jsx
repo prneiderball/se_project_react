@@ -1,41 +1,50 @@
-import { useState, useContext, useEffect } from "react";
+import { useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../context/CurrentUserContext";
+import { useContext } from "react";
+import { useForm } from "../../hooks/useForm";
 
-function EditProfileModal({ isOpen, closeActiveModal, handleUpdateUser }) {
+function EditProfileModal({ isOpen, closeActiveModal, handleUpdateUser, isLoading }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    avatar: "",
+  });
 
+  // Initialize form when modal opens or currentUser changes
   useEffect(() => {
-    if (currentUser) {
-      setName(currentUser.name || "");
-      setAvatar(currentUser.avatar || "");
+    if (currentUser && isOpen) {
+      setValues({
+        name: currentUser.name || "",
+        avatar: currentUser.avatar || "",
+      });
     }
-  }, [currentUser, isOpen]);
+  }, [currentUser, isOpen, setValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleUpdateUser({ name, avatar });
+    handleUpdateUser(values);
   };
 
   return (
     <ModalWithForm
       title="Edit Profile"
+      buttonText="Save"
       isOpen={isOpen}
       closeActiveModal={closeActiveModal}
       onSubmit={handleSubmit}
-      buttonText="Save"
+      isLoading={isLoading}
     >
       <label className="modal__label" htmlFor="profile-name">
         Name
       </label>
       <input
         id="profile-name"
+        name="name"
         type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={values.name}
+        onChange={handleChange}
         required
       />
 
@@ -44,9 +53,10 @@ function EditProfileModal({ isOpen, closeActiveModal, handleUpdateUser }) {
       </label>
       <input
         id="profile-avatar"
+        name="avatar"
         type="url"
-        value={avatar}
-        onChange={(e) => setAvatar(e.target.value)}
+        value={values.avatar}
+        onChange={handleChange}
         required
       />
     </ModalWithForm>
