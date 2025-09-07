@@ -1,24 +1,22 @@
 import "./LoginModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState } from "react";
+import { useForm } from "../../hooks/useForm";
 
 export default function LoginModal({
   isOpen = false,
   closeActiveModal,
   handleLogin,
-  openSignUpModal
+  openSignUpModal,
 }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const { values, handleChange, setValues } = useForm({
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin({ email, password });
-    setEmail("");
-    setPassword("");
+    handleLogin(values);
+    setValues({ email: "", password: "" }); // reset form
   };
 
   if (!isOpen) return null;
@@ -38,8 +36,8 @@ export default function LoginModal({
           className="modal__input"
           id="email"
           placeholder="Email"
-          onChange={handleEmailChange}
-          value={email}
+          value={values.email}
+          onChange={handleChange}
           required
         />
       </label>
@@ -52,8 +50,8 @@ export default function LoginModal({
           className="modal__input"
           id="password"
           placeholder="Password"
-          onChange={handlePasswordChange}
-          value={password}
+          value={values.password}
+          onChange={handleChange}
           required
         />
       </label>
@@ -62,7 +60,7 @@ export default function LoginModal({
         <button
           type="submit"
           className="modal__submit"
-          disabled={!email || !password}
+          disabled={!values.email || !values.password}
         >
           Log In
         </button>

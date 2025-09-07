@@ -1,22 +1,18 @@
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState } from "react";
+import { useForm } from "../../hooks/useForm";
 
-export default function AddItemModal({
-  isOpen,
-  closeActiveModal,
-  handleAddItemSubmit,
-}) {
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [weather, setWeather] = useState("");
+export default function AddItemModal({ isOpen, closeActiveModal, handleAddItemSubmit }) {
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    imageUrl: "",
+    weather: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAddItemSubmit({ name, imageUrl, weather });
-    setName("");
-    setImageUrl("");
-    setWeather("");
+    handleAddItemSubmit(values);
+    setValues({ name: "", imageUrl: "", weather: "" }); // reset after submit
   };
 
   return (
@@ -35,8 +31,8 @@ export default function AddItemModal({
           className="modal__input"
           id="name"
           placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={values.name}
+          onChange={handleChange}
           required
         />
       </label>
@@ -44,12 +40,13 @@ export default function AddItemModal({
       <label htmlFor="imageUrl" className="modal__label">
         Image
         <input
+          name="imageUrl"
           type="url"
           className="modal__input"
           id="imageUrl"
           placeholder="Image URL"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
+          value={values.imageUrl}
+          onChange={handleChange}
           required
         />
       </label>
@@ -69,8 +66,8 @@ export default function AddItemModal({
               type="radio"
               className="modal__radio-input"
               value={type}
-              checked={weather === type}
-              onChange={(e) => setWeather(e.target.value)}
+              checked={values.weather === type}
+              onChange={handleChange}
               required
             />
             <span>{type.charAt(0).toUpperCase() + type.slice(1)}</span>

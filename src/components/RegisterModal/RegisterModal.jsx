@@ -1,25 +1,28 @@
 import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState } from "react";
+import { useForm } from "../../hooks/useForm";
 
-export default function RegisterModal({ isOpen, closeActiveModal, handleRegister }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [avatarUrl, setAvatarUrl] = useState("");
-
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
-  const handleNameChange = (e) => setName(e.target.value);
-  const handleAvatarUrlChange = (e) => setAvatarUrl(e.target.value);
+export default function RegisterModal({
+  isOpen,
+  closeActiveModal,
+  handleRegister,
+}) {
+  const { values, handleChange, setValues } = useForm({
+    email: "",
+    password: "",
+    name: "",
+    avatarUrl: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegister({ email, password, name, avatar: avatarUrl });
-    setEmail("");
-    setPassword("");
-    setName("");
-    setAvatarUrl("");
+    handleRegister({
+      email: values.email,
+      password: values.password,
+      name: values.name,
+      avatar: values.avatarUrl,
+    });
+    setValues({ email: "", password: "", name: "", avatarUrl: "" }); // reset
   };
 
   return (
@@ -38,8 +41,8 @@ export default function RegisterModal({ isOpen, closeActiveModal, handleRegister
           className="modal__input"
           id="register-email"
           placeholder="Email"
-          onChange={handleEmailChange}
-          value={email}
+          onChange={handleChange}
+          value={values.email}
           required
         />
       </label>
@@ -52,8 +55,8 @@ export default function RegisterModal({ isOpen, closeActiveModal, handleRegister
           className="modal__input"
           id="register-password"
           placeholder="Password"
-          onChange={handlePasswordChange}
-          value={password}
+          onChange={handleChange}
+          value={values.password}
           required
         />
       </label>
@@ -66,8 +69,8 @@ export default function RegisterModal({ isOpen, closeActiveModal, handleRegister
           className="modal__input"
           id="register-name"
           placeholder="Name"
-          onChange={handleNameChange}
-          value={name}
+          onChange={handleChange}
+          value={values.name}
           required
         />
       </label>
@@ -80,8 +83,8 @@ export default function RegisterModal({ isOpen, closeActiveModal, handleRegister
           className="modal__input"
           id="register-avatar"
           placeholder="Avatar URL"
-          onChange={handleAvatarUrlChange}
-          value={avatarUrl}
+          onChange={handleChange}
+          value={values.avatarUrl}
           required
         />
       </label>
