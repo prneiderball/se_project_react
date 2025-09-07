@@ -34,6 +34,7 @@ function App() {
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -63,6 +64,17 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") handleCloseModal();
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+    return () => document.removeEventListener("keydown", handleEscClose);
+  }, [activeModal]);
+
   const handleOpenAddItemModal = () => setActiveModal("add");
   const handleOpenItemModal = (card) => {
     setSelectedCard(card);
@@ -73,6 +85,10 @@ function App() {
   const handleOpenEditProfileModal = () => setActiveModal("editProfile");
   const handleCloseModal = () => setActiveModal("");
 
+  const handleToggleSwitchChange = () => {
+    setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
+  };
+
   const handleSignOut = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
@@ -81,73 +97,74 @@ function App() {
     navigate("/");
   };
 
+  const handleSubmit = (request) => {
+    setIsLoading(true);
+    request()
+      .then(handleCloseModal)
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  };
+
   const handleRegister = ({ name, avatar, email, password }) => {
-    signup({ name, avatar, email, password })
-      .then(() => {
-        handleCloseModal();
-        return handleLogin({ email, password });
-      })
-      .catch(console.error);
+    const request = () =>
+      signup({ name, avatar, email, password }).then(() =>
+        handleLogin({ email, password })
+      );
+    handleSubmit(request);
   };
 
   const handleLogin = ({ email, password }) => {
-    signin({ email, password })
-      .then((data) => {
-        localStorage.setItem("jwt", data.token);
-        return checkToken(data.token);
-      })
-      .then((userData) => {
-        setCurrentUser(userData);
-        setIsLoggedIn(true);
-        return fetchClothingItems();
-      })
-      .then((items) => {
-        setClothingItems(items);
-        handleCloseModal();
-        navigate("/profile");
-      })
-      .catch(console.error);
-  };
-
-  const handleToggleSwitchChange = () => {
-    setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
+    const request = () =>
+      signin({ email, password })
+        .then((data) => {
+          localStorage.setItem("jwt", data.token);
+          return checkToken(data.token);
+        })
+        .then((userData) => {
+          setCurrentUser(userData);
+          setIsLoggedIn(true);
+          return fetchClothingItems();
+        })
+        .then((items) => setClothingItems(items));
+    handleSubmit(request);
+    request().then(() => navigate("/profile"));
   };
 
   const handleAddItemSubmit = (item) => {
-    postNewItem(item)
-      .then((newItem) => setClothingItems((prev) => [newItem, ...prev]))
-      .catch(console.error);
+    const request = () =>
+      postNewItem(item).then((newItem) =>
+        setClothingItems((prev) => [newItem, ...prev])
+      );
+    handleSubmit(request);
   };
 
   const handleCardLike = ({ _id, isLiked }) => {
     const action = !isLiked ? addCardLike : removeCardLike;
-    action(_id)
-      .then((updatedCard) => {
+    const request = () =>
+      action(_id).then((updatedCard) =>
         setClothingItems((cards) =>
           cards.map((item) => (item._id === _id ? updatedCard : item))
-        );
-      })
-      .catch(console.error);
+        )
+      );
+    handleSubmit(request);
   };
 
   const handleUpdateUser = ({ name, avatar }) => {
-    updateUserProfile(name, avatar)
-      .then((updatedUser) => {
-        setCurrentUser(updatedUser);
-        handleCloseModal();
-      })
-      .catch(console.error);
+    const request = () =>
+      updateUserProfile(name, avatar).then((updatedUser) =>
+        setCurrentUser(updatedUser)
+      );
+    handleSubmit(request);
   };
 
   const handleDeleteItem = (itemId) => {
-    deleteItem(itemId)
-      .then(() => {
+    const request = () =>
+      deleteItem(itemId).then(() =>
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item._id !== itemId)
-        );
-        handleCloseModal();
-      })
-      .catch(console.error);
+        )
+      );
+    handleSubmit(request);
   };
 
   return (
@@ -163,6 +180,7 @@ function App() {
             onRegisterClick={handleOpenRegisterModal}
             weatherData={weatherData}
           />
+
           <Routes>
             <Route
               path="/"
@@ -192,11 +210,14 @@ function App() {
               }
             />
           </Routes>
+
           <Footer />
+
           <AddItemModal
             isOpen={activeModal === "add"}
             closeActiveModal={handleCloseModal}
             handleAddItemSubmit={handleAddItemSubmit}
+            isLoading={isLoading}
           />
           <ItemModal
             isOpen={activeModal === "item"}
@@ -209,17 +230,19 @@ function App() {
             closeActiveModal={handleCloseModal}
             handleLogin={handleLogin}
             openSignUpModal={handleOpenRegisterModal}
+            isLoading={isLoading}
           />
           <RegisterModal
             isOpen={activeModal === "register"}
             closeActiveModal={handleCloseModal}
             handleRegister={handleRegister}
+            isLoading={isLoading}
           />
           <EditProfileModal
             isOpen={activeModal === "editProfile"}
             closeActiveModal={handleCloseModal}
             handleUpdateUser={handleUpdateUser}
-            currentUser={currentUser}
+            isLoading={isLoading}
           />
         </div>
       </CurrentTemperatureUnitContext.Provider>

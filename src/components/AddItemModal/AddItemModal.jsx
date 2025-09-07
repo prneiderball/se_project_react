@@ -15,6 +15,7 @@ export default function AddItemModal({ isOpen, closeActiveModal, handleAddItemSu
     handleAddItemSubmit(values);
   };
 
+  // Reset form only when modal opens
   useEffect(() => {
     if (isOpen) {
       setValues({ name: "", imageUrl: "", weather: "" });

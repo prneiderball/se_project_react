@@ -1,6 +1,7 @@
 import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
+import { useEffect } from "react";
 
 export default function RegisterModal({
   isOpen,
@@ -14,6 +15,13 @@ export default function RegisterModal({
     avatarUrl: "",
   });
 
+  // Reset form only when the modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setValues({ email: "", password: "", name: "", avatarUrl: "" });
+    }
+  }, [isOpen, setValues]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleRegister({
@@ -22,7 +30,6 @@ export default function RegisterModal({
       name: values.name,
       avatar: values.avatarUrl,
     });
-    setValues({ email: "", password: "", name: "", avatarUrl: "" }); // reset
   };
 
   return (

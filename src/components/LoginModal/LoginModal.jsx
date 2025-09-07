@@ -1,6 +1,7 @@
 import "./LoginModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
+import { useEffect } from "react";
 
 export default function LoginModal({
   isOpen = false,
@@ -13,10 +14,16 @@ export default function LoginModal({
     password: "",
   });
 
+  // Reset form only when the modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setValues({ email: "", password: "" });
+    }
+  }, [isOpen, setValues]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(values);
-    setValues({ email: "", password: "" }); // reset form
   };
 
   if (!isOpen) return null;
