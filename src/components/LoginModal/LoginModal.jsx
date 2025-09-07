@@ -14,7 +14,6 @@ export default function LoginModal({
     password: "",
   });
 
-  // Reset form only when the modal opens
   useEffect(() => {
     if (isOpen) {
       setValues({ email: "", password: "" });
