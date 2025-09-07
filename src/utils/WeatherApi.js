@@ -15,7 +15,7 @@ export function getWeatherData(coords = coordinates, APIkeyValue = APIkey) {
     .then(handleResponse)
     .catch((error) => {
       console.error("Error fetching weather data:", error);
-      return null; 
+      return null;
     });
 }
 
