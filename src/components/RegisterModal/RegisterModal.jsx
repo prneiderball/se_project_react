@@ -107,9 +107,9 @@ export default function RegisterModal({
         >
           Sign Up
         </button>
-        <span className="modal__alt" onClick={openLoginModal}>
+        <button type="button" className="modal__alt" onClick={openLoginModal}>
           or Log In
-        </span>
+        </button>
       </div>
     </ModalWithForm>
   );

@@ -237,6 +237,7 @@ function App() {
             closeActiveModal={handleCloseModal}
             handleRegister={handleRegister}
             isLoading={isLoading}
+            openLoginModal={handleOpenLoginModal}
           />
           <EditProfileModal
             isOpen={activeModal === "editProfile"}

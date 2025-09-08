@@ -70,9 +70,9 @@ export default function LoginModal({
         >
           Log In
         </button>
-        <span className="modal__alt" onClick={openSignUpModal}>
+        <button type="button" className="modal__alt" onClick={openSignUpModal}>
           or Sign Up
-        </span>
+        </button>
       </div>
     </ModalWithForm>
   );
