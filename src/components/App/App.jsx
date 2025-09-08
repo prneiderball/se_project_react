@@ -125,9 +125,12 @@ function App() {
           setIsLoggedIn(true);
           return fetchClothingItems();
         })
-        .then((items) => setClothingItems(items));
+        .then((items) => {
+          setClothingItems(items);
+          navigate("/profile");
+        });
+
     handleSubmit(request);
-    request().then(() => navigate("/profile"));
   };
 
   const handleAddItemSubmit = (item) => {
