@@ -19,12 +19,12 @@ export const weatherConditions = [
     condition: "thunderstorm",
     url: new URL("../assets/daytime/thunderstorm.svg", import.meta.url).href,
   },
-    {
+  {
     day: true,
     condition: "snow",
     url: new URL("../assets/daytime/snow.svg", import.meta.url).href,
   },
-    {
+  {
     day: true,
     condition: "fog",
     url: new URL("../assets/daytime/fog.svg", import.meta.url).href,
@@ -49,16 +49,16 @@ export const weatherConditions = [
     condition: "thunderstorm",
     url: new URL("../assets/nighttime/thunderstorm.svg", import.meta.url).href,
   },
-    {
+  {
     day: false,
     condition: "snow",
     url: new URL("../assets/nighttime/snow.svg", import.meta.url).href,
   },
-    {
+  {
     day: false,
     condition: "fog",
     url: new URL("../assets/nighttime/fog.svg", import.meta.url).href,
-  }
+  },
 ];
 
 export const defaultClothingItems = [
@@ -105,4 +105,9 @@ export const coordinates = {
   longitude: -89.04899,
 };
 
-export const APIkey = import.meta.env.VITE_OPENWEATHER_API_KEY || "5ad6e7ae478a7f6130431459f7945f10"; // key for testing purposes only
+export const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.prnbwtwr.twilightparadox.com"
+    : "http://localhost:3001";
+
+export const APIkey = import.meta.env.VITE_OPENWEATHER_API_KEY;

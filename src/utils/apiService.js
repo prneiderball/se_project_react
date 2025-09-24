@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3001";
+import { BASE_URL } from "./constants";
 
 function handleResponse(res) {
   if (!res.ok) {
@@ -26,7 +26,7 @@ function getHeaders() {
 }
 
 function fetchClothingItems() {
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`${BASE_URL}/items`, {
     headers: getHeaders(),
   })
     .then(handleResponse)
@@ -34,7 +34,7 @@ function fetchClothingItems() {
 }
 
 function postNewItem(item) {
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`${BASE_URL}/items`, {
     method: "POST",
     headers: getHeaders(),
     body: JSON.stringify(item),
@@ -44,7 +44,7 @@ function postNewItem(item) {
 }
 
 function deleteItem(itemId) {
-  return fetch(`${baseUrl}/items/${itemId}`, {
+  return fetch(`${BASE_URL}/items/${itemId}`, {
     method: "DELETE",
     headers: getHeaders(),
   })
@@ -53,7 +53,7 @@ function deleteItem(itemId) {
 }
 
 export const updateUserProfile = (name, avatar) => {
-  return fetch(`${baseUrl}/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: getHeaders(),
     body: JSON.stringify({ name, avatar }),
@@ -61,7 +61,7 @@ export const updateUserProfile = (name, avatar) => {
 };
 
 export function addCardLike(itemId) {
-  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+  return fetch(`${BASE_URL}/items/${itemId}/likes`, {
     method: "PUT",
     headers: getHeaders(),
   })
@@ -70,7 +70,7 @@ export function addCardLike(itemId) {
 }
 
 export function removeCardLike(itemId) {
-  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+  return fetch(`${BASE_URL}/items/${itemId}/likes`, {
     method: "DELETE",
     headers: getHeaders(),
   })
