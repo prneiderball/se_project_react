@@ -8,7 +8,7 @@ const { errors } = require("celebrate");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 const app = express();
-const { PORT } = process.env;
+const PORT = process.env.PORT;
 
 console.log("Loaded PORT from .env:", process.env.PORT);
 
