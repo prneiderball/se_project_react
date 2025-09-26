@@ -26,6 +26,12 @@ import { defaultClothingItems } from "../../utils/constants.js";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit.jsx";
 import CurrentUserContext from "../../context/CurrentUserContext.jsx";
 
+console.log("Render start", {
+  clothingItems,
+  userData,
+  currentTemperatureUnit,
+});
+
 function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [activeModal, setActiveModal] = useState("");
@@ -194,6 +200,8 @@ function App() {
                   onCardClick={handleOpenItemModal}
                   onAddClick={handleOpenAddItemModal}
                   onCardLike={handleCardLike}
+                  handleItemDelete={handleDeleteItem}
+                  handleConfirmDeleteRequest={handleDeleteItem}
                 />
               }
             />
