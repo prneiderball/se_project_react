@@ -18,7 +18,7 @@ mongoose
 app.use(
   cors({
     origin: ["http://localhost:3000",
-            "https://prnbwtwr.twilightparadox.com/"],
+            "https://prnbwtwr.twilightparadox.com"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
