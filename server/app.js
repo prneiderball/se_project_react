@@ -15,11 +15,20 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://prnbwtwr.twilightparadox.com",
+];
+
 app.use(
   cors({
-    origin: ["http://localhost:3000",
-            "https://prnbwtwr.twilightparadox.com"],
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
