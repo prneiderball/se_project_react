@@ -15,7 +15,7 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-  // White list of allowed origins
+  // allowedOrigin whitelist
 const allowedOrigins = [
   "http://localhost:3000",
   "https://prnbwtwr.twilightparadox.com",
@@ -24,10 +24,10 @@ const allowedOrigins = [
 //CORS config: Validates incoming origin dynamically
 app.use(
   cors({
-    //checks if incoming question is in allowedOrigin whitelist
+    //checks if incoming request is in allowedOrigin whitelist
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      //if true, allow
+      //if verified, allow
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
