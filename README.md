@@ -1,24 +1,10 @@
 # WTWR (What to Wear)
 
-[Live Demo](https://prneiderball.github.io/se_project_react/)  
+[Live Demo](https://prnbwtwr.twilightparadox.com/)  
 [Repository](https://github.com/prneiderball/se_project_react/tree/main/wtwr)
 
 ---
 
-## Table of Contents
-
-1. [Project Overview](#project-overview)
-2. [Features](#features)
-3. [Architecture and Technologies](#architecture-and-technologies)
-4. [Installation](#installation)
-5. [Usage](#usage)
-6. [Project Structure](#project-structure)
-7. [Future Work](#future-work)
-8. [Contributing](#contributing)
-9. [License](#license)
-10. [Contact](#contact)
-
----
 
 ## Project Overview
 
@@ -51,6 +37,8 @@ Key objectives:
 - **Utilities**: Custom `apiService.js` for encapsulating fetch logic; `constants.js` for static mappings (e.g., weather conditions).
 
 ---
+
+## Server Readme located in server directory (DB & API info)
 
 ## Installation
 

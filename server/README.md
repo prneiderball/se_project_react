@@ -1,6 +1,9 @@
 # SE Project Express
 
-This is a Node.js backend server built with Express and MongoDB (via Mongoose) for the **WTWR (What To Wear?)** app. It provides a REST API to manage users and clothing items.
+This is a Node.js backend server built with Express and MongoDB (via Mongoose) for the **WTWR (What To Wear?)** app. It provides a REST API to manage users and clothing items. 
+
+Frontend deployed at: https://prnbwtwr.twilightparadox.com/ 
+Server deployed at: https://api.prnbwtwr.twilightparadox.com/
 
 ## Features
 
@@ -16,8 +19,8 @@ This is a Node.js backend server built with Express and MongoDB (via Mongoose) f
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/your-repo.git
-   cd SE_PROJECT_EXPRESS
+   git clone https://github.com/prneiderball/se_project_react
+   cd SE_PROJECT_REACT/server
    ```
 
 2. Install dependencies:
@@ -39,8 +42,6 @@ This is a Node.js backend server built with Express and MongoDB (via Mongoose) f
 * Connects to `mongodb://127.0.0.1:27017/wtwr_db`.
 
 ## API Endpoints
-
-A mock user ID `685c6952f918db537ca941ec` is attached to each request for testing.
 
 ### Users
 
