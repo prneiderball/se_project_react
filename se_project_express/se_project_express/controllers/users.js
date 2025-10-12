@@ -7,7 +7,7 @@ const {
   UnauthorizedError,
   ConflictError,
   NotFoundError,
-} = require("../utils/errors");
+} = require("../utils/errors/index");
 const { JWT_SECRET } = require("../utils/config");
 
 const createUser = async (req, res, next) => {
@@ -32,9 +32,14 @@ const createUser = async (req, res, next) => {
 
     return res.status(201).json(userResponse);
   } catch (err) {
+    if (err.name === "ValidationError") {
+      return next(new BadRequestError("Invalid data"));
+    }
+
     if (err.code === 11000 && err.keyPattern?.email) {
       return next(new ConflictError("Email already in use"));
     }
+
     return next(err);
   }
 };
@@ -81,7 +86,9 @@ const updateUserProfile = async (req, res, next) => {
     const { name, avatar } = req.body;
 
     if (!name && !avatar) {
-      return next(new BadRequestError("At least one field (name or avatar) is required"));
+      return next(
+        new BadRequestError("At least one field (name or avatar) is required")
+      );
     }
 
     const updatedUser = await User.findByIdAndUpdate(
@@ -92,9 +99,14 @@ const updateUserProfile = async (req, res, next) => {
 
     return res.json(updatedUser);
   } catch (err) {
+    if (err.name === "ValidationError") {
+      return next(new BadRequestError("Invalid data"));
+    }
+
     if (err.message === "User not found") {
       return next(new NotFoundError("User not found"));
     }
+
     return next(err);
   }
 };

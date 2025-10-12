@@ -5,8 +5,7 @@ const {
   UnauthorizedError,
   ForbiddenError,
   NotFoundError,
-  ConflictError,
-} = require("../utils/errors");
+} = require("../utils/errors/index");
 
 const createItem = async (req, res, next) => {
   try {
@@ -32,7 +31,6 @@ const createItem = async (req, res, next) => {
   }
 };
 
-
 const getItems = async (req, res, next) => {
   try {
     const items = await ClothingItem.find({});
@@ -55,7 +53,9 @@ const deleteItem = async (req, res, next) => {
     );
 
     if (item.owner.toString() !== req.user._id.toString()) {
-      return next(new ForbiddenError("You do not have permission to delete this item"));
+      return next(
+        new ForbiddenError("You do not have permission to delete this item")
+      );
     }
 
     await item.deleteOne();

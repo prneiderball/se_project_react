@@ -17,7 +17,9 @@ const handleError = (err, res) => {
     return res.status(NOT_FOUND).json({ message: err.message });
   }
 
-  return res.status(SERVER_ERROR).json({ message: "An error occurred on the server" });
+  return res
+    .status(SERVER_ERROR)
+    .json({ message: "An error occurred on the server" });
 };
 
 module.exports = handleError;
