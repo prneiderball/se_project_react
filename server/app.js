@@ -53,6 +53,9 @@ app.get("/crash-test", () => {
   }, 0);
 });
 
+const clientPath = path.join(__dirname, "../client/dist");
+app.use(express.static(clientPath));
+
 app.use("/", routes);
 
 app.use(errorLogger);
