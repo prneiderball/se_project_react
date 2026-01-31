@@ -1,0 +1,35 @@
+{
+  "name": "wtwr",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "homepage": "https://prnbwtwr.twilightparadox.com/",
+  "scripts": {
+    "dev": "vite --open",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "npm run build && scp -r ./dist/* neiderballgroup@prnbwtwr.twilightparadox.com:/home/neiderballgroup/frontend"
+  },
+  "dependencies": {
+    "celebrate": "^15.0.3",
+    "express-winston": "^4.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.30.1",
+    "validator": "^13.15.15",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "gh-pages": "^6.3.0",
+    "vite": "^6.3.3"
+  }
+}
