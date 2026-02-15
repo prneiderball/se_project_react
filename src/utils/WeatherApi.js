@@ -26,11 +26,11 @@ export function parseWeatherData(data) {
     city: data.name,
     temp: {
       F: Math.round(data.main.temp),
-      C: Math.round(((data.main.temp - 32) * 5) / 9),
+      C: Math.round(((data.main.temp - 32) * 5) / 9)
     },
     type: getWeatherType(Math.round(data.main.temp)),
     description: data.weather[0].main.toLowerCase(),
-    isDayTime: isDayTime(data.sys, Date.now()),
+    isDayTime: isDayTime(data.sys, Date.now())
   };
 }
 

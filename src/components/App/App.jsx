@@ -19,7 +19,7 @@ import {
   updateUserProfile,
   deleteItem,
   addCardLike,
-  removeCardLike,
+  removeCardLike
 } from "../../utils/apiService.js";
 import { signup, signin, checkToken } from "../../utils/auth.js";
 import { defaultClothingItems } from "../../utils/constants.js";
